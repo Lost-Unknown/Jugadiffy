@@ -1,4 +1,16 @@
-import { Schema, model , models } from "mongoose";
+import mongoose, { Schema, model , modelNames, models } from "mongoose";
+import { SYSTEM_ENTRYPOINTS } from "next/dist/shared/lib/constants";
+
+const CartItemSchema = new Schema({
+  item: {
+    type: Schema.Types.ObjectId,
+    ref: 'Product',
+  },
+  quantity: {
+    type: Number,
+    default: 1, // You can set the default quantity to 1 or any other value you prefer.
+  },
+});
 
 const UserSchema = new Schema({
     email: {
@@ -13,9 +25,15 @@ const UserSchema = new Schema({
     },
     image: {
       type: String,
+    },
+    dob:{
+      type:String
+    },
+    cart: {
+      items:[CartItemSchema] // Use the defined CartItemSchema for the items array.
     }
   });
-  
+  const CartSchema = models.CartItemSchema ||model("CartItemSchema",CartItemSchema);  
   const User = models.User || model("User", UserSchema);
 
 export default User;

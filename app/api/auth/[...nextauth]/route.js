@@ -2,9 +2,14 @@ import NextAuth from "next-auth";
 import GoogleProvider from 'next-auth/providers/google';
 import { connectToDB } from "@utils/database";
 import User from "@models/user";
+import CartItemSchema from "@models/user"
 import { userAgent } from "next/server";
+import { SYSTEM_ENTRYPOINTS } from "next/dist/shared/lib/constants";
+import { data } from "autoprefixer";
+import { Router } from "next/navigation";
 
 const handler = NextAuth({
+
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
@@ -36,6 +41,7 @@ const handler = NextAuth({
                     email: profile.email,
                     username :profile.name.replace(" ","").toLowerCase(),
                     image:profile.picture,
+                    dob:"01/01/2000", 
                 })
             }
             return true;
