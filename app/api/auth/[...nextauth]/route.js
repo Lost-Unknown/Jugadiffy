@@ -13,7 +13,9 @@ const handler = NextAuth({
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
-            clientSecret:process.env.GOOGLE_CLIENT_SECRET,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            scopes: ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/user.birthday.read'],
+            prompt: 'consent',
         })
     ],
     callbacks:{
@@ -37,12 +39,15 @@ const handler = NextAuth({
             });
 
             if(!UserExists){
+                const dob = profile.birthday ? profile.birthday : "1970-01-01";
                 await User.create({
                     email: profile.email,
                     username :profile.name.replace(" ","").toLowerCase(),
                     image:profile.picture,
-                    dob:"01/01/2000", 
+                    dob:dob, 
                 })
+                console.log(profile.hasBirthday)
+                console.log(profile.birthday)
             }
             return true;
         }

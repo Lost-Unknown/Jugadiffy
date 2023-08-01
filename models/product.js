@@ -1,12 +1,12 @@
 import { Schema, model, models } from 'mongoose';
 
 const ProductSchema = new Schema({
-  name: {
+  pname: {
     type: String,
     required : [true,"Name is required"]
   },
   price: {
-    type: Float,
+    type: Number,
     required: [true, 'Price is required.'],
   },
   desc:{

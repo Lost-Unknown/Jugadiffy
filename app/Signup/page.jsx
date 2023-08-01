@@ -116,7 +116,7 @@ function Signup() {
                     htmlFor="password"
                     className="block text-sm font-medium leading-6 text-zinc-400"
                   >
-                    Comfirm Password
+                    Confirm Password
                   </label>
                 </div>
                 <div className="mt-2">

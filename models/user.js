@@ -27,7 +27,8 @@ const UserSchema = new Schema({
       type: String,
     },
     dob:{
-      type:String
+      type:Date,
+      required:[true,"DOB is required"]
     },
     cart: {
       items:[CartItemSchema] // Use the defined CartItemSchema for the items array.
