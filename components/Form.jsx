@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
+
+const Form = ({ type, post, setPost, submitting, handleSubmit}) => {
   return (
     <section className='w-full max-w-full flex-start flex-col'>
       <h1 className='head_text text-left'>
@@ -51,7 +52,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
             className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
           />
         </label>
-
+        
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className='text-gray-500 text-sm'>
             Cancel

@@ -34,7 +34,6 @@ const CreateProduct = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
     <Form
       type='Create'
@@ -42,7 +41,7 @@ const CreateProduct = () => {
       setPost={setPost}
       submitting={submitting}
       handleSubmit={createProduct}
-    />
+      />
   );
 };
 

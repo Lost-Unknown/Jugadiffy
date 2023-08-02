@@ -149,11 +149,15 @@
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-zinc-700 min-w-[210px] flex flex-col gap-2 justify-start items-start;
+}
+
+.dropdownDesktop {
+  @apply absolute right-6 top-14 mt-3 w-1/4 p-5 rounded-lg bg-zinc-700 min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
 
 .dropdown_link {
-  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+  @apply text-sm font-inter text-zinc-300 hover:text-gray-500 font-medium;
 }
 
 /* PromptCard Component */
@@ -179,4 +183,11 @@
 
 .flex-between2 {
   @apply  justify-between items-center;
+}
+
+.search-icon{
+  background-image: url('/assets/images/Magnify-glass.svg');
+  background-repeat: no-repeat;
+  background-position:right;
+  background-size:1.5rem;
 }

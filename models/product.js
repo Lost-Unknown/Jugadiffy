@@ -1,5 +1,11 @@
 import { Schema, model, models } from 'mongoose';
 
+const ImageSchema = new Schema({
+  img:{
+    type: String
+  }
+})
+
 const ProductSchema = new Schema({
   pname: {
     type: String,
@@ -12,7 +18,8 @@ const ProductSchema = new Schema({
   desc:{
     type: String,
     required: [true,"Desc is required."]
-  }
+  },
+  image:[ImageSchema]
 });
 
 const Product = models.Product || model('Product', ProductSchema);
