@@ -9,7 +9,7 @@ const CreateProduct = () => {
   const router = useRouter();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ pname: "", price: "" ,desc:""});
+  const [post, setPost] = useState({ pname: "", price: "" ,desc:"",image:[]});
 
   const createProduct = async (e) => {
     e.preventDefault();
@@ -21,7 +21,8 @@ const CreateProduct = () => {
         body: JSON.stringify({
           pname: post.pname,
           price: post.price,
-          desc:post.desc
+          desc:post.desc,
+          image:post.image
         }),
       });
 

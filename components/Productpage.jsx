@@ -6,7 +6,7 @@ const ProductPage = ({post, setPost}) => {
         <div className='flex w-full md:flex-row flex-col p-1 bg-black border border-zinc-700 rounded-xl'>
             <div className=' md:w-3/5 w-full flex flex-center'>
               <Image 
-                src="/assets/images/t-shirt.avif"
+                src={post.image[0]}
                 width={800}
                 height ={800}
                 className="aspect-square"

@@ -40,7 +40,7 @@ function Nav() {
               JUGADIFFY
             </p>
           </Link>
-          <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
+          <Link href="/search" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
           <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Shirts</Link>
           <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Mugs</Link>
         </div>
@@ -133,7 +133,7 @@ function Nav() {
                   />
                 </form>
                 <Link
-                  href="/profile"
+                  href="/search"
                   className="dropdown_link"
                   onClick={() => settoggleDropdown(false)}
                 >

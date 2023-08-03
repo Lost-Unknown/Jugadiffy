@@ -2,13 +2,13 @@ import React from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 
-const ProductCard = ({Name,Price,ImageUrl,ObjectId}) => {
+const ProductCard = ({Name,Price,Url,ImageUrl}) => {
   const router = useRouter();
   return (
-  <div className="flex items-center relative justify-center max-h-max aspect-square h-full flex-grow hover:border-blue-500 border border-zinc-700 bg-black rounded-lg cursor-pointer lg:w-1/3  md:w-1/2 w-full">
+  <div className="flex items-center relative justify-center max-h-max aspect-square h-full overflow-hidden flex-grow hover:border-blue-500 border border-zinc-700 bg-black rounded-lg cursor-pointer w-full">
   <Image
     src={ImageUrl}
-    onClick={()=>router.push(`/product/?id=${ObjectId}`) }
+    onClick={()=>router.push(`/product/?id=${Url}`) }
     width={800}
     height={800}
     className="hover:scale-100 transition scale-90 duration-300 h-full w-full"

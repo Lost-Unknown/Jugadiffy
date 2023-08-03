@@ -15,7 +15,7 @@ export const GET = async (request, {params}) => {
 }   
 
 export const PATCH = async (request, {params}) =>{
-    const {product,tag} = await request.json();
+    const {product} = await request.json();
     try{
         await connectToDB();
 
@@ -25,6 +25,7 @@ export const PATCH = async (request, {params}) =>{
         existingProduct.pname = pname;
         existingProduct.price = price;
         existingProduct.desc = desc;
+        existingProduct.image = image;
 
         await existingProduct.save();
         return new Response(JSON.stringify(existingProduct), { status: 200 })

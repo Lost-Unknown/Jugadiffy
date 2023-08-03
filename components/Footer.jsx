@@ -23,37 +23,37 @@ const Footer = () => {
         </div>
         <div className="flex flex-col ml-4">
           <Link
-            href=""
+            href="/"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             Home
           </Link>
           <Link
-            href=""
+            href="/About"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             About
           </Link>
           <Link
-            href=""
+            href="/TermCondition"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             Terms & Conditions
           </Link>
           <Link
-            href=""
+            href="ShippingPolicy"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             Shipping & Return Policy
           </Link>
           <Link
-            href=""
+            href="PrivacyPolicy"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             Privacy Policy
           </Link>
           <Link
-            href=""
+            href="FAQ"
             className="hover:underline hover:text-zinc-200 hover:underline-offset-4 text-zinc-400 p-1 text-sm font-semibold"
           >
             FAQ

@@ -46,8 +46,6 @@ const handler = NextAuth({
                     image:profile.picture,
                     dob:dob, 
                 })
-                console.log(profile.hasBirthday)
-                console.log(profile.birthday)
             }
             return true;
         }

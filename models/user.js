@@ -1,5 +1,4 @@
-import mongoose, { Schema, model , modelNames, models } from "mongoose";
-import { SYSTEM_ENTRYPOINTS } from "next/dist/shared/lib/constants";
+import mongoose, { Schema, model, models } from "mongoose";
 
 const CartItemSchema = new Schema({
   item: {
