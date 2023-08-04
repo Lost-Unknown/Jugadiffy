@@ -4,7 +4,6 @@ import Home from "@app/page";
 import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
-
 export const metadata = {
   title: "Jugadiffy",
   description: "Jugadiffy",

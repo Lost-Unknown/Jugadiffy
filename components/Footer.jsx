@@ -10,14 +10,14 @@ const Footer = () => {
         <div>
           <Link href="/" className="flex gap-2 flex-center pl-4 md:pl-0">
             <Image
-              src="/assets/images/logo.svg"
+              src="/assets/images/LogoJug.png"
               alt="promptopialogo"
-              width={30}
-              height={30}
-              className=" object-contain"
+              width={40}
+              height={40}
+              className=" object-contain mix-blend-screen"
             />
-            <p className="text-white text-xl font-semibold font-satoshi">
-              JUGADIFFY
+            <p className="text-white text-xl font-semibold font_style">
+              JUGAADIFY
             </p>
           </Link>
         </div>

@@ -9,7 +9,7 @@ const CreateProduct = () => {
   const router = useRouter();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ pname: "", price: "" ,desc:"",image:[]});
+  const [post, setPost] = useState({ pname: "", price: "" ,desc:"",image:[],colour:[],size:[],category:[]});
 
   const createProduct = async (e) => {
     e.preventDefault();
@@ -22,7 +22,10 @@ const CreateProduct = () => {
           pname: post.pname,
           price: post.price,
           desc:post.desc,
-          image:post.image
+          image:post.image,
+          colour:post.colour,
+          size:post.size,
+          category:post.category
         }),
       });
 

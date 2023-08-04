@@ -14,7 +14,10 @@ const ProductSchema = new Schema({
     type: String,
     required: [true,"Desc is required."]
   },
-  image:[String]
+  image:[String],
+  colour:[String],
+  size:[String],
+  category:[String]
 });
 
 const Product = models.Product || model('Product', ProductSchema);

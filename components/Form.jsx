@@ -67,6 +67,54 @@ const Form = ({ type, post, setPost, submitting, handleSubmit}) => {
             className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
           />
         </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-zinc-300'>
+            Colour
+          </span>
+          <input
+            id="image"
+            type="text"
+            value={post.colour}
+            onChange={(e) => setPost({ ...post, colour: e.target.value.split(",")})}
+            placeholder='Image'
+            required
+            multiple
+            className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
+          />
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-zinc-300'>
+            Size
+          </span>
+          <input
+            id="image"
+            type="text"
+            value={post.size}
+            onChange={(e) => setPost({ ...post, size: e.target.value.split(",")})}
+            placeholder='Image'
+            required
+            multiple
+            className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
+          />
+        </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-zinc-300'>
+            Category
+          </span>
+          <input
+            id="image"
+            type="text"
+            value={post.category}
+            onChange={(e) => setPost({ ...post, category: e.target.value.split(",")})}
+            placeholder='Image'
+            required
+            multiple
+            className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
+          />
+        </label>
         
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className='text-gray-500 text-sm'>
