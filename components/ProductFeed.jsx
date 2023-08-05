@@ -4,30 +4,33 @@ import ProductCard from "./ProductCard"
 
 const ProductCardList = ({data}) => {
   return (
-    <div className='grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 w-full h-auto'>
+    <div className='grid  md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 w-full h-auto'>
       {data.map((post) => (
         <ProductCard
           key={post._id}
           Name = {post.pname}
           Price = {post.price}
+          Price2 = {post.price2}
           Url = {post._id}
           ImageUrl = {post.image[0]}
+          Colour = {post.colour}
+          Size = {post.size}
         />
       ))}
     </div>
   )
 }
 
-const ProductFeed = () => {
+const ProductFeed = ({category}) => {
     const [ posts,setPosts] = useState([]);
-    
+    const apiUrl = category === "all" ? "/api/product" : `/api/search/${category}`;
     useEffect(() => {
-      const fetchPosts = async () =>{
-        const response = await fetch('/api/product');
-        const data = await response.json();
-        setPosts(data);
-      }
-  
+      const fetchPosts = async () => {
+
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+          setPosts(data);
+      };
       fetchPosts();  
     },[]);
     return (

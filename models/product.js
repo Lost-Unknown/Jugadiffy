@@ -10,6 +10,10 @@ const ProductSchema = new Schema({
     type: Number,
     required: [true, 'Price is required.'],
   },
+  price2: {
+    type: Number,
+    required: [true, 'Price is required.'],
+  },
   desc:{
     type: String,
     required: [true,"Desc is required."]

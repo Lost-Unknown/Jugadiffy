@@ -196,3 +196,7 @@
 .cat-link{
   @apply hover:underline hover:text-zinc-100 hover:underline-offset-4 text-zinc-200 p-1 text-sm font-semibold;
 }
+
+.p-card{
+  aspect-ratio: 1/1.5;
+}

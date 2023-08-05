@@ -30,17 +30,17 @@ function Nav() {
         <div className="flex gap-8 md:gap-2 justify-start w-1/3 items-center ">
           <Link href="/" className="flex gap-2 flex-center">
             <Image
-              src="/assets/images/Logojug.png"
-              alt="promptopialogo"
+              src="/assets/images/LogoJug.png"
+              alt="Logo"
               width={40}
               height={40}
               className=" object-contain mix-blend-screen"
             />
             <p className="text-xl text-zinc-300 font-semibold font_style mix-blend-lighten">
-              JUGADIFFY
+              JUGAADIFY
             </p>
           </Link>
-          <Link href="/search" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
+          <Link href="/search/?category=all" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
           <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Shirts</Link>
           <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Mugs</Link>
         </div>
@@ -140,7 +140,7 @@ function Nav() {
                   All
                 </Link>
                 <Link
-                  href="/cart"
+                  href="/search/?category=all"
                   className="dropdown_link"
                   onClick={() => settoggleDropdown(false)}
                 >
@@ -157,14 +157,14 @@ function Nav() {
             )}
         <Link href="/" className="flex gap-2 flex-center">
           <Image
-            src="/assets/images/Logojug.png"
-            alt="promptopialogo"
+            src="/assets/images/LogoJug.png"
+            alt="logo"
             width={40}
             height={40}
             className=" object-contain mix-blend-screen"
           />
           <p className="text-white text-xl font-semibold font_style">
-            JUGADIFFY
+            JUGAADIFY
           </p>
         </Link>
         {session?.user ? (

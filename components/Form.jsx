@@ -39,6 +39,20 @@ const Form = ({ type, post, setPost, submitting, handleSubmit}) => {
             className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
           />
         </label>
+
+        <label>
+          <span className='font-satoshi font-semibold text-base text-zinc-300'>
+            Price Original
+          </span>
+          <input
+            value={post.price2}
+            onChange={(e) => setPost({ ...post, price2: e.target.value })}
+            type='text'
+            placeholder='Price'
+            required
+            className='w-full  rounded-xl p-2 bg-zinc-700 text-zinc-200'
+          />
+        </label>
         <label>
           <span className='font-satoshi font-semibold text-base text-zinc-300'>
             Description
