@@ -11,7 +11,7 @@ const Footer = () => {
           <Link href="/" className="flex gap-2 flex-center pl-4 md:pl-0">
             <Image
               src="/assets/images/LogoJug.png"
-              alt="promptopialogo"
+              alt="Logo"
               width={40}
               height={40}
               className=" object-contain mix-blend-screen"

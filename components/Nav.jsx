@@ -30,8 +30,8 @@ function Nav() {
         <div className="flex gap-8 md:gap-2 justify-start w-1/3 items-center ">
           <Link href="/" className="flex gap-2 flex-center">
             <Image
-              src="/assets/images/Logojug.png"
-              alt="promptopialogo"
+              src="/assets/images/LogoJug.png"
+              alt="Logo"
               width={40}
               height={40}
               className=" object-contain mix-blend-screen"
@@ -41,8 +41,8 @@ function Nav() {
             </p>
           </Link>
           <Link href="/search/?category=all" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
-          <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Shirts</Link>
-          <Link href="" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Mugs</Link>
+          <Link href="/search/?category=Shirts" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Shirts</Link>
+          <Link href="/search/?category=Mugs" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Mugs</Link>
         </div>
         <form className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-1/3 h-full">
           <input
@@ -133,14 +133,14 @@ function Nav() {
                   />
                 </form>
                 <Link
-                  href="/search"
+                  href="/search?category=all"
                   className="dropdown_link"
                   onClick={() => settoggleDropdown(false)}
                 >
                   All
                 </Link>
                 <Link
-                  href="/search/?category=all"
+                  href="/search/?category=Shirt"
                   className="dropdown_link"
                   onClick={() => settoggleDropdown(false)}
                 >
@@ -148,7 +148,7 @@ function Nav() {
                 </Link>
                 <Link
                   href="/cart"
-                  className="dropdown_link"
+                  className="/search?category=Mugs"
                   onClick={() => settoggleDropdown(false)}
                 >
                   Mugs
@@ -157,7 +157,7 @@ function Nav() {
             )}
         <Link href="/" className="flex gap-2 flex-center">
           <Image
-            src="/assets/images/Logojug.png"
+            src="/assets/images/LogoJug.png"
             alt="promptopialogo"
             width={40}
             height={40}
