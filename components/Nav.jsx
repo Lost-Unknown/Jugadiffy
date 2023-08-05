@@ -30,8 +30,8 @@ function Nav() {
         <div className="flex gap-8 md:gap-2 justify-start w-1/3 items-center ">
           <Link href="/" className="flex gap-2 flex-center">
             <Image
-              src="/assets/images/LogoJug.png"
-              alt="Logo"
+              src="/assets/images/Logojug.png"
+              alt="promptopialogo"
               width={40}
               height={40}
               className=" object-contain mix-blend-screen"
@@ -157,8 +157,8 @@ function Nav() {
             )}
         <Link href="/" className="flex gap-2 flex-center">
           <Image
-            src="/assets/images/LogoJug.png"
-            alt="logo"
+            src="/assets/images/Logojug.png"
+            alt="promptopialogo"
             width={40}
             height={40}
             className=" object-contain mix-blend-screen"
