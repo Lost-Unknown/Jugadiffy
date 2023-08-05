@@ -34,23 +34,23 @@ function Nav() {
               alt="Logo"
               width={40}
               height={40}
-              className=" object-contain mix-blend-screen"
+              className=" object-contai"
             />
-            <p className="text-xl text-zinc-300 font-semibold font_style mix-blend-lighten">
+            <p className="text-xl text-zinc-800 font-semibold font_style">
               JUGAADIFY
             </p>
           </Link>
-          <Link href="/search/?category=all" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">All</Link>
-          <Link href="/search/?category=Shirts" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Shirts</Link>
-          <Link href="/search/?category=Mugs" className="text-sm font-semibold bg-none text-zinc-400 hover:underline underline-offset-2">Mugs</Link>
+          <Link href="/search/?category=all" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">All</Link>
+          <Link href="/search/?category=Shirts" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">Shirts</Link>
+          <Link href="/search/?category=Mugs" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">Mugs</Link>
         </div>
-        <form className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-1/3 h-full">
+        <form className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-500 rounded-xl overflow-hidden bg-zinc-200 focus:ring-zinc-700 flex-center w-1/3 h-full">
           <input
             type="text"
             placeholder="Search for Products"
             onChange={() => {}}
             required
-            className="search-icon bg-zinc-900  p-2 pl-4 pr-4 rounded-lg text-zinc-500 focus:outline-0 w-full text-md"
+            className="search-icon bg-zinc-200  placeholder:text-zinc-700 p-2 pl-4 pr-4 text-zinc-700 focus:outline-0 w-full text-md"
           />
         </form>
         {session?.user ? (
@@ -119,17 +119,17 @@ function Nav() {
           onClick={() => {settoggleDropdown2((prev) => !prev);
             settoggleDropdown(false);
           }}
-          className=" border border-zinc-600 bg-zinc-900 rounded-lg"
+          className=" border border-zinc-600 bg-zinc-200 rounded-lg text-zinc-700"
         />
         {toogleDropdown2 && (
-              <div className="dropdown z-10">
-                <form className=" sm:flex hidden relative bg-zinc-900 pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-full h-full">
+              <div className="dropdown z-10 transition  duration-200">
+                <form className=" sm:flex hidden relative overflow-hidden bg-zinc-200 pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-full h-full">
                   <input
                     type="text"
                     placeholder="Search for Products"
                     onChange={() => {}}
                     required
-                    className="search-icon bg-zinc-900  p-2 pl-4 pr-4 rounded-lg text-zinc-500 focus:outline-0 w-full text-md"
+                    className="search-icon bg-zinc-200  p-2 pl-4 pr-4 placeholder:text-zinc-600 text-zinc-700 focus:outline-0 w-full text-md"
                   />
                 </form>
                 <Link
@@ -147,8 +147,8 @@ function Nav() {
                   Shirts
                 </Link>
                 <Link
-                  href="/cart"
-                  className="/search?category=Mugs"
+                  href="/search?category=Mugs"
+                  className="dropdown_link"
                   onClick={() => settoggleDropdown(false)}
                 >
                   Mugs
@@ -161,9 +161,9 @@ function Nav() {
             alt="promptopialogo"
             width={40}
             height={40}
-            className=" object-contain mix-blend-screen"
+            className=" object-contain"
           />
-          <p className="text-white text-xl font-semibold font_style">
+          <p className="text-black text-xl font-semibold font_style">
             JUGAADIFY
           </p>
         </Link>

@@ -8,7 +8,7 @@ const ViewProduct = () => {
   const searchParams = useSearchParams();
   const productId = searchParams.get('id');
 
-  const [post, setPost] = useState({pname: "", price: "",desc:"",image:[],colour:[],size:[],category:[]});
+  const [post, setPost] = useState({pname: "", price: "",price2:"",desc:"",image:[],colour:[],size:[],category:[]});
 
 
     useEffect(()=>{
@@ -19,6 +19,7 @@ const ViewProduct = () => {
         setPost({
           pname:data.pname,
           price:data.price,
+          price2:data.price2,
           desc:data.desc,
           image:data.image,
           colour:data.colour,

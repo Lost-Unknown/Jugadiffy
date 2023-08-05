@@ -4,7 +4,7 @@ import ChipList from './ColourList'
 const ProductPage = ({post, setPost}) => {
   return (
     <section className=' w-full'>
-        <div className='flex w-full md:flex-row flex-col p-1 bg-black border border-zinc-700 rounded-xl'>
+        <div className='flex w-full md:flex-row flex-col p-1 bg-white rounded-xl'>
             <div className=' md:w-3/5 w-full flex flex-center'>
               <Image 
                 src={post.image[0]}
@@ -14,22 +14,26 @@ const ProductPage = ({post, setPost}) => {
               />
             </div>
             <div className=' md:w-2/5 w-full flex flex-col gap-1 md:p-16 p-4'>
-              <h2 className=' text-zinc-200 text-5xl font-semibold font-sans'>{post.pname}</h2>
-              <button className='text-white rounded-full bg-blue-600 w-fit p-2 mt-3'>₹{post.price}</button>
-              <hr className='mt-8 mb-8 border-zinc-600' />
+            <h2 className=' text-zinc-800 text-5xl font-semibold font-sans'>{post.pname}</h2>
+            <div className="flex py-0.5 gap-2 items-end">
+              <p className="text-black text-xl">₹{post.price}</p>
+              <p className="text-zinc-700 text-lg line-through">{post.price2}</p>
+              <p className="text-green-500 text-xl font-semibold">{((post.price2/post.price)*100)-100}% off</p>
+            </div>
+              <hr className='mt-4 mb-8 border-zinc-600' />
               <form className='flex flex-col gap-4'>
-                <h3 className='text-white font-sans text-2xl font-semibold'>COLOR</h3>
+                <h3 className='text-zinc-800 font-sans text-2xl font-semibold'>COLOR</h3>
                 <ChipList 
                   data={post.colour}
                   value={post.colour}
                 />
-                <h3 className='text-white font-sans text-2xl font-semibold'>SIZE</h3>
+                <h3 className='text-zinc-800 font-sans text-2xl font-semibold'>SIZE</h3>
                 <ChipList 
                   data={post.size}
                   value={post.size}
                 />
-                <p className='text-white'>{post.desc}</p>
                 <button className='w-full bg-blue-600 rounded-full pt-4 pb-4 text-white'>Add To Cart</button>
+                <p className='text-zinc-800'>{post.desc}</p>
               </form>
             </div>
        </div>
