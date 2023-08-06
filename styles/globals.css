@@ -154,7 +154,7 @@
 }
 
 .dropdownDesktop {
-  @apply absolute right-6 top-14 mt-3 w-1/4 p-5 rounded-lg bg-zinc-700 min-w-[210px] flex flex-col gap-2 justify-end items-end;
+  @apply absolute right-6 top-14 mt-3 w-1/4 p-5 rounded-lg bg-white border border-black min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
 
 .dropdown_link {

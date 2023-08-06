@@ -1,24 +1,20 @@
-import React from 'react'
-import Chip from './Chip'
+import React from 'react';
+import Chip from './Chip';
 
-const ChipList = ({ data,value }) => {
-    const chips = [];
-  
-    for (const post of data) {
-      chips.push(post);
-    }
-  
-    return (
-      <div className='block mb-4'>
-        {
-          chips.map(post => (
-            <Chip
-              text={post}
-              value={value}
-            />
-          ))}
-      </div>
-    );
-  };
+const ChipList = ({ data, valparam, onChipClick }) => {
+  return (
+    <div className='block mb-4'>
+      {data.map((post) => (
+        <Chip
+          key={post} // Make sure to add a unique key for each chip
+          text={post}
+          value={post}
+          selected={valparam === post}
+          onChipClick={onChipClick}
+        />
+      ))}
+    </div>
+  );
+};
 
-export default ChipList
+export default ChipList;

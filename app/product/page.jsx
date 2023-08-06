@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import {useSearchParams } from "next/navigation";
 import ProductPage from "@components/Productpage";
 
-const ViewProduct = () => {
+const ViewProduct =  () => {
+  
   const searchParams = useSearchParams();
   const productId = searchParams.get('id');
 
-  const [post, setPost] = useState({pname: "", price: "",price2:"",desc:"",image:[],colour:[],size:[],category:[]});
+  const [submitting, setIsSubmitting] = useState(false);
+  const [post, setPost] = useState({id:"",pname: "", price: "",price2:"",desc:"",image:[],colour:[],size:[],category:[]});
 
 
     useEffect(()=>{
@@ -17,6 +19,7 @@ const ViewProduct = () => {
         const data = await response.json();
 
         setPost({
+          id:productId,
           pname:data.pname,
           price:data.price,
           price2:data.price2,
@@ -34,6 +37,7 @@ const ViewProduct = () => {
     <ProductPage 
         post={post}
         setPost={setPost}
+        submitting={submitting}
     />
   );
 };

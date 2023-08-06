@@ -119,7 +119,7 @@ function Nav() {
           onClick={() => {settoggleDropdown2((prev) => !prev);
             settoggleDropdown(false);
           }}
-          className=" border border-zinc-600 bg-zinc-200 rounded-lg text-zinc-700"
+          className=" rounded-lg text-zinc-700"
         />
         {toogleDropdown2 && (
               <div className="dropdown z-10 transition  duration-200">
