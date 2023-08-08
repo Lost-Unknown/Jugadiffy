@@ -14,7 +14,6 @@ function Nav() {
   const [toogleDropdown2, settoggleDropdown2] = useState(false);
   const [toogleDropdownDesktop, settoggleDropdownDesktop] = useState(false);
 
-
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -40,9 +39,24 @@ function Nav() {
               JUGAADIFY
             </p>
           </Link>
-          <Link href="/search/?category=all" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">All</Link>
-          <Link href="/search/?category=Shirts" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">Shirts</Link>
-          <Link href="/search/?category=Mugs" className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2">Mugs</Link>
+          <Link
+            href="/search/?category=all"
+            className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2"
+          >
+            All
+          </Link>
+          <Link
+            href="/search/?category=Shirts"
+            className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2"
+          >
+            Shirts
+          </Link>
+          <Link
+            href="/search/?category=Mugs"
+            className="text-sm font-semibold bg-none text-zinc-700 hover:underline underline-offset-2"
+          >
+            Mugs
+          </Link>
         </div>
         <form className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-500 rounded-xl overflow-hidden bg-zinc-200 focus:ring-zinc-700 flex-center w-1/3 h-full">
           <input
@@ -95,18 +109,22 @@ function Nav() {
         ) : (
           <>
             {providers &&
-              Object.values(providers).map((provider) => (
-                <div className="w-1/3 flex justify-end items-end">
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => router.push("/Signin")}
-                  className="black_btn "
-                >
-                  Sign In
-                </button>
-                </div>
-              ))}
+              Object.values(providers).map((provider) => {
+                if (provider.id === "google") {
+                  return (
+                    <div className="w-1/3 flex justify-end items-end">
+                      <button
+                        type="button"
+                        key={provider.name}
+                        onClick={() => router.push("/Signin")}
+                        className="black_btn "
+                      >
+                        Sign In
+                      </button>
+                    </div>
+                  );
+                }
+              })}
           </>
         )}
       </div>
@@ -116,45 +134,46 @@ function Nav() {
           src="/assets/images/hamburger.svg"
           width={35}
           height={35}
-          onClick={() => {settoggleDropdown2((prev) => !prev);
+          onClick={() => {
+            settoggleDropdown2((prev) => !prev);
             settoggleDropdown(false);
           }}
           className=" rounded-lg text-zinc-700"
         />
         {toogleDropdown2 && (
-              <div className="dropdown z-10 transition  duration-200">
-                <form className=" sm:flex hidden relative overflow-hidden bg-zinc-200 pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-full h-full">
-                  <input
-                    type="text"
-                    placeholder="Search for Products"
-                    onChange={() => {}}
-                    required
-                    className="search-icon bg-zinc-200  p-2 pl-4 pr-4 placeholder:text-zinc-600 text-zinc-700 focus:outline-0 w-full text-md"
-                  />
-                </form>
-                <Link
-                  href="/search?category=all"
-                  className="dropdown_link"
-                  onClick={() => settoggleDropdown(false)}
-                >
-                  All
-                </Link>
-                <Link
-                  href="/search/?category=Shirt"
-                  className="dropdown_link"
-                  onClick={() => settoggleDropdown(false)}
-                >
-                  Shirts
-                </Link>
-                <Link
-                  href="/search?category=Mugs"
-                  className="dropdown_link"
-                  onClick={() => settoggleDropdown(false)}
-                >
-                  Mugs
-                </Link>
-              </div>
-            )}
+          <div className="dropdown z-10 transition  duration-200">
+            <form className=" sm:flex hidden relative overflow-hidden bg-zinc-200 pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-full h-full">
+              <input
+                type="text"
+                placeholder="Search for Products"
+                onChange={() => {}}
+                required
+                className="search-icon bg-zinc-200  p-2 pl-4 pr-4 placeholder:text-zinc-600 text-zinc-700 focus:outline-0 w-full text-md"
+              />
+            </form>
+            <Link
+              href="/search?category=all"
+              className="dropdown_link"
+              onClick={() => settoggleDropdown(false)}
+            >
+              All
+            </Link>
+            <Link
+              href="/search/?category=Shirt"
+              className="dropdown_link"
+              onClick={() => settoggleDropdown(false)}
+            >
+              Shirts
+            </Link>
+            <Link
+              href="/search?category=Mugs"
+              className="dropdown_link"
+              onClick={() => settoggleDropdown(false)}
+            >
+              Mugs
+            </Link>
+          </div>
+        )}
         <Link href="/" className="flex gap-2 flex-center">
           <Image
             src="/assets/images/LogoJug.png"
@@ -175,8 +194,9 @@ function Nav() {
               width={40}
               height={40}
               className=" object-contain rounded-full"
-              onClick={() => {settoggleDropdown((prev) => !prev);
-              settoggleDropdown2(false);
+              onClick={() => {
+                settoggleDropdown((prev) => !prev);
+                settoggleDropdown2(false);
               }}
             />
             {toogleDropdown && (
@@ -211,16 +231,20 @@ function Nav() {
         ) : (
           <>
             {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => router.push("/Signin")}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              ))}
+              Object.values(providers).map((provider) => {
+                if (provider.id === "google") {
+                  return (
+                    <button
+                      type="button"
+                      key={provider.name}
+                      onClick={() => router.push("/Signin")}
+                      className="black_btn"
+                    >
+                      Sign In
+                    </button>
+                  );
+                }
+              })}
           </>
         )}
       </div>

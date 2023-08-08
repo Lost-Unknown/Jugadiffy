@@ -1,6 +1,5 @@
 import mongoose, { Schema, model, models } from "mongoose";
-import Product from "./product";
-
+import Order from "./order";
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -10,30 +9,62 @@ const UserSchema = new Schema({
   username: {
     type: String,
     required: [true, "Username is required!"],
-    match: [
-      /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/,
-      "Username invalid, it should contain 8-20 alphanumeric letters and be unique!",
-    ],
   },
   image: {
     type: String,
+    default: "/assets/images/profile.svg",
+  },
+  password:{
+    type:String,
+    require:[true,"Password is required"]
   },
   dob: {
     type: Date,
     required: [true, "DOB is required"],
   },
-  cart: [{
-    Productid: {
-      type: Schema.Types.ObjectId,
-      ref: Product,
+  mobile: {
+    type: Number,
+  },
+  address: {
+    street: {
+      type:String,
+      required:[true,"address is required"]
     },
-    quantity: {
-      type: Number,
-      default: 1,
+    city:  {
+      type:String,
+      required:[true,"address is required"]
     },
-    colour: String,
-    size: String,
-}]
+    state:  {
+      type:String,
+      required:[true,"address is required"]
+    },
+    pincode:  {
+      type:Number,
+      required:[true,"address is required"]
+    },
+  },
+  cart: [
+    {
+      Productid: {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+      quantity: {
+        type: Number,
+        default: 1,
+      },
+      colour: String,
+      size: String,
+    },
+  ],
+  orders: [
+    {
+      order: {
+        type: Schema.Types.ObjectId,
+        ref: "Order", // This should be a string with the name of the model
+      },
+    },
+  ],
 });
 const User = models.User || model("User", UserSchema);
 

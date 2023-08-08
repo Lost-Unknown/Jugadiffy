@@ -10,7 +10,18 @@ import { useRouter } from "next/navigation";
 function Signin() {
   const router = useRouter();
   const { data: session } = useSession();
-  const [providers, setProviders] = useState(null);
+  const [providers, setProviders ] = useState(null);
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    signIn("custom-auth",{
+      email:email,
+      password:password,
+    })
+  };  
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -33,9 +44,11 @@ function Signin() {
           router.push("/")
         ) : (
           <>
-            <form className="space-y-6" action="#" method="">
+            
               {providers &&
-                Object.values(providers).map((provider) => (
+                Object.values(providers).map((provider) => {
+                  if(provider.id ==="google"){
+                  return(
                   <button
                     onClick={() => signIn(provider.id)}
                     className="p-2 flex gap-2 flex-center border border-zinc-700  w-full text-center md:rounded-md rounded-lg"
@@ -45,9 +58,10 @@ function Signin() {
                       width={25}
                       height={25}
                     />
-                    <p className="text-zinc-700">Sign in with Googel</p>
+                    <p className="text-zinc-700">Sign in with Google</p>
                   </button>
-                ))}
+                )}})}
+                <form className="space-y-6 mt-4" action="#" method="POST">
               <div className="flex w-full flex-row justify-center items-center">
                 <div className="flex w-2/5 border-b-2 border-zinc-700"></div>
                 <p className="text-zinc-700 w-1/5 text-center">or</p>
@@ -93,8 +107,7 @@ function Signin() {
                   <input
                     id="password"
                     name="password"
-                    type="password"
-                    autoComplete="current-password"
+                    type="password"autoComplete="current-password"
                     required
                     className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-950 shadow-sm ring-1 ring-inset ring-zinc-950 placeholder:text-zinc-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
                   />
@@ -105,6 +118,9 @@ function Signin() {
                 <button
                   type="submit"
                   className="flex w-full justify-center md:rounded-md rounded-xl bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={
+                    handleSignIn
+                  }
                 >
                   Sign in
                 </button>

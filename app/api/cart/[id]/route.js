@@ -23,12 +23,12 @@ export const POST = async (request) => {
       
       const currentUser = await User.findById(id);
       if (!currentUser) {
-        return new Response("User not found", { status: 404 });
+        return new Response("User Not found");
       }
       // Add the new cart item to the user's cart
       const existingCartItem = currentUser.cart.find(
         (item) =>
-          item.Productid.toString() === productid &&
+          item.Productid === productid &&
           item.colour === color &&
           item.size === size
       );
@@ -47,58 +47,26 @@ export const POST = async (request) => {
   
       return new Response("Item added to the cart successfully", { status: 200 });
     } catch (error) {
-      return new Response("Failed to add item to the cart", { status: 500 });
+      return new Response("Failed to add item to the cart"+error, { status: 500 });
     }
   };
   
   export const DELETE = async (request, { params }) => {
     try {
       await connectToDB();
-      const { userId, itemId } = params;
-  
-      const currentUser = await User.findById(userId);
+      const currentUser = await User.findOne({'cart._id':params.id});
   
       if (!currentUser) {
-        return new Response("User not found", { status: 404 });
+        return new Response("Cart item not found", { status: 404 });
       }
-  
-      // Remove the cart item with the given item ID from the user's cart
-      currentUser.cart = currentUser.cart.filter((item) => item._id.toString() !== itemId);
+      
+      // Use a function to compare ObjectIds
+      currentUser.cart = currentUser.cart.filter((item) => !item._id.equals(params.id));
       await currentUser.save();
-  
       return new Response("Item removed from the cart successfully", { status: 200 });
     } catch (error) {
       return new Response("Failed to remove item from the cart", { status: 500 });
     }
   };
-  
-  export const UPDATE = async (request, { params }) => {
-    try {
-      await connectToDB();
-      const { userId, itemId } = params;
-      const { quantity, color, size } = await request.json();
-  
-      const currentUser = await User.findById(userId);
-  
-      if (!currentUser) {
-        return new Response("User not found", { status: 404 });
-      }
-  
-      // Find the cart item with the given item ID and update its quantity, color, and size
-      const cartItem = currentUser.cart.find((item) => item._id.toString() === itemId);
-  
-      if (!cartItem) {
-        return new Response("Cart item not found", { status: 404 });
-      }
-  
-      cartItem.quantity = quantity;
-      cartItem.colour = color;
-      cartItem.size = size;
-  
-      await currentUser.save();
-  
-      return new Response("Cart item updated successfully", { status: 200 });
-    } catch (error) {
-      return new Response("Failed to update cart item", { status: 500 });
-    }
-  };
+
+ 

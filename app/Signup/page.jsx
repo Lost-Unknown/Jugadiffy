@@ -11,7 +11,12 @@ function Signup() {
   const router = useRouter();
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null);
-
+  const [post, setPost] = useState({
+    username: "",
+    email: "",
+    password: "",
+    dob: new Date(),
+  });
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -20,6 +25,28 @@ function Signup() {
     };
     setUpProviders();
   }, []);
+
+  const SignUp = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          username: post.username,
+          password: post.password,
+          email: post.email,
+          dob: post.dob,
+        }),
+      });
+
+      if (response.ok) {
+        console.log("User Successfully created! \n" + response);
+        router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-2 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -33,21 +60,25 @@ function Signup() {
           router.push("/")
         ) : (
           <>
-            <form className="space-y-6" action="#" method="">
-              {providers &&
-                Object.values(providers).map((provider) => (
-                  <button
-                    onClick={() => signIn(provider.id)}
-                    className="p-2 flex gap-2 flex-center border border-zinc-700  w-full text-center md:rounded-md rounded-lg"
-                  >
-                    <Image
-                      src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-                      width={25}
-                      height={25}
-                    />
-                    <p className="text-zinc-700">Sign in with Googel</p>
-                  </button>
-                ))}
+            {providers &&
+              Object.values(providers).map((provider) => {
+                if (provider.id === "google") {
+                  return (
+                    <button
+                      onClick={() => signIn(provider.id)}
+                      className="p-2 flex gap-2 flex-center border border-zinc-700  w-full text-center md:rounded-md rounded-lg"
+                    >
+                      <Image
+                        src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+                        width={25}
+                        height={25}
+                      />
+                      <p className="text-zinc-700">Sign in with Google</p>
+                    </button>
+                  );
+                }
+              })}
+            <form className="space-y-6 mt-4" action="#" method="">
               <div className="flex w-full flex-row justify-center items-center">
                 <div className="flex w-2/5 border-b-2 border-zinc-700"></div>
                 <p className="text-zinc-700 w-1/5 text-center">or</p>
@@ -64,6 +95,10 @@ function Signup() {
                   <input
                     id="email"
                     name="email"
+                    value={post.username}
+                    onChange={(e) =>
+                      setPost({ ...post, username: e.target.value })
+                    }
                     type="text"
                     required
                     className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
@@ -83,6 +118,10 @@ function Signup() {
                     id="email"
                     name="email"
                     type="email"
+                    value={post.email}
+                    onChange={(e) =>
+                      setPost({ ...post, email: e.target.value })
+                    }
                     autoComplete="email"
                     required
                     className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
@@ -104,6 +143,10 @@ function Signup() {
                     id="password"
                     name="password"
                     type="password"
+                    value={post.password}
+                    onChange={(e) =>
+                      setPost({ ...post, password: e.target.value })
+                    }
                     required
                     className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
                   />
@@ -133,7 +176,7 @@ function Signup() {
               <div>
                 <div className="flex items-center justify-between">
                   <label
-                    htmlFor="password"
+                    For="date"
                     className="block text-sm font-medium leading-6 text-zinc-800"
                   >
                     Date Of Birth
@@ -141,9 +184,11 @@ function Signup() {
                 </div>
                 <div className="mt-2">
                   <input
-                    id="password"
-                    name="password"
+                    id="date"
+                    name="date"
                     type="date"
+                    value={post.date}
+                    onChange={(e) => setPost({ ...post, date: e.target.value })}
                     required
                     className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholde:text-zinc-600 :ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
                   />
@@ -154,6 +199,7 @@ function Signup() {
                 <button
                   type="submit"
                   className="flex w-full justify-center md:rounded-md rounded-xl bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={SignUp}
                 >
                   Create Account
                 </button>

@@ -28,7 +28,7 @@ const ProductPage = ({ post, setPost }) => {
       if (!isAddToCartDisabled && session?.user) {
         setSubmitting(true);
         // Make the API post call to save the selected color and size to the database
-        const response = await fetch("/api/cart", {
+        const response = await fetch(`/api/cart/${session?.user.id}`, {
           method: "POST",
           body: JSON.stringify({
             id: session?.user.id ,
@@ -37,7 +37,6 @@ const ProductPage = ({ post, setPost }) => {
             size: selectedSize,
           }),
         });
-
         if (response.ok) {
           setAdded(true)
           // You can show a success message or update the UI accordingly
