@@ -1,38 +1,8 @@
 import NextAuth from "next-auth";
-import GoogleProvider from 'next-auth/providers/google';
+import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDB } from "@utils/database";
 import User from "@models/user";
-import { userAgent } from "next/server";
-
-const CustomAuthProvider = {
-  name: "custom-auth",
-
-    credentials: {
-    email: { label: "Email", type: "email" },
-    password: { label: "Password", type: "password" },
-  },
-
-  async signIn({ email, password }) {
-    try {
-      const response = await fetch("/api/auth/signin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.status === 200) {
-        const user = await response.json();
-        return user;
-      } else {
-        return null;
-      }
-    } catch (error) {
-      throw new Error("Authentication failed");
-    }
-  },
-};
 
 const handler = NextAuth({
   providers: [
@@ -46,42 +16,71 @@ const handler = NextAuth({
       ],
       prompt: "consent",
     }),
-    CustomAuthProvider
+    CredentialsProvider({
+      name: "Email and Password",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+        },
+      },
+      authorize: async (credentials) => {
+        try {
+          await connectToDB();
+          const { email, password } = credentials;
+
+          const user = await User.findOne({ email });
+
+          if (user && user.password === password) {
+            return Promise.resolve(user);
+          } else {
+            return Promise.resolve(null);
+          }
+        } catch (error) {
+          console.error("Authentication error:", error);
+          return Promise.resolve(null);
+        }
+      },
+    }),
   ],
 
   callbacks: {
-    async session({ session  }) {
+    async session({ session }) {
       const sessionUser = await User.findOne({
         email: session.user.email,
       });
       session.user.id = sessionUser._id.toString();
 
-      return session; 
+      return session;
     },
 
-    async signIn({ profile }) {
+    async signIn({ provider, profile, email, password }) {
       try {
         await connectToDB();
-        const UserExists = await User.findOne({
-          email: profile.email,
+        const userExists = await User.findOne({
+          email: profile ? profile.email : email,
         });
 
-        if (!UserExists) {
-          const dob = profile.birthday ? profile.birthday : "1970-01-01";
+        if (!userExists) {
+          const dob = profile?.birthday || "1970-01-01";
           const newUser = new User({
-            email: profile.email,
-            username: profile.name,
-            image: profile.picture,
+            email: profile ? profile.email : email,
+            username: profile?.name || "Unknown",
+            image: profile?.picture || "",
             dob: dob,
-            password:(Math.random()*10000).toString(),
-            mobile:1000000000,
-            address:{
-              street:"street",
-              city:"City",
-              state:"State",
-              pincode:100000,
-            }
-          })
+            password: (Math.random() * 10000).toString(),
+            mobile: 1000000000,
+            address: {
+              street: "street",
+              city: "City",
+              state: "State",
+              pincode: 100000,
+            },
+          });
           newUser.save();
         }
         return true;
@@ -93,4 +92,4 @@ const handler = NextAuth({
   },
 });
 
-export { handler as GET, handler as POST }
+export {handler as GET, handler as POST};

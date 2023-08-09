@@ -12,14 +12,15 @@ function Signin() {
   const { data: session } = useSession();
   const [providers, setProviders ] = useState(null);
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    signIn("custom-auth",{
+    await signIn("credentials",{
       email:email,
       password:password,
+      redirect:false
     })
   };  
 
@@ -50,7 +51,7 @@ function Signin() {
                   if(provider.id ==="google"){
                   return(
                   <button
-                    onClick={() => signIn(provider.id)}
+                    onClick={()=>signIn(provider.id)}
                     className="p-2 flex gap-2 flex-center border border-zinc-700  w-full text-center md:rounded-md rounded-lg"
                   >
                     <Image

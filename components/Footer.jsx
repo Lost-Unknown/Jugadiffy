@@ -63,7 +63,7 @@ const Footer = () => {
       <div className="md:flex-row  flex-col flex gap-2 pt-3 pb-3 text-zinc-200 flex-center">
         <p>© 2023 Jugadiffy. All rights reserved.</p>
         <span className="md:block hidden">|</span>
-        <p>Designed in California</p>
+        <p>Loved by India</p>
       </div>
     </section>
   );

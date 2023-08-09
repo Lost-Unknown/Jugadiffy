@@ -119,7 +119,7 @@ const CartPage = () => {
             decreaseQuantity={decreaseQuantity}
           />
         </div>
-        <div className="flex md:w-2/5 w-full flex-col bg-zinc-100 rounded-lg  mt-8 md:mt-0">
+        <div className="flex md:w-2/5 w-full flex-col bg-slate-100 border border-zinc-300 rounded-lg  mt-8 md:mt-0">
           <div className="md:p-12 md:w-full mt-2 mb-4 md:mt-0 md:mb-2  w-11/12 mr-auto ml-auto md:ml-0 p-1 flex flex-col md:gap-2 gap-1">
             <h2 className="text-zinc-800 text-xl">Order Summary</h2>
             <div className="flex flex-between text-zinc-800 pt-2 pb-2">
@@ -129,11 +129,6 @@ const CartPage = () => {
             <hr className="border-zinc-500" />
             <div className="flex flex-between text-zinc-800 pt-2 pb-2">
               <p className=" font-thin">Shipping Estimate</p>
-              <p className="font-semibold ">₹0.00</p>
-            </div>
-            <hr className="border-zinc-500" />
-            <div className="flex flex-between text-zinc-800 pt-2 pb-2">
-              <p className=" font-thin">Tax estimate</p>
               <p className="font-semibold ">₹0.00</p>
             </div>
             <hr className="border-zinc-500" />

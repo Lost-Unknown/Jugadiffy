@@ -154,21 +154,22 @@ function Nav() {
             <Link
               href="/search?category=all"
               className="dropdown_link"
-              onClick={() => settoggleDropdown(false)}
+              onClick={() =>{settoggleDropdown2(false)}}
             >
               All
             </Link>
             <Link
               href="/search/?category=Shirt"
               className="dropdown_link"
-              onClick={() => settoggleDropdown(false)}
+              onClick={() =>{settoggleDropdown2(false)}}
+
             >
               Shirts
             </Link>
             <Link
               href="/search?category=Mugs"
               className="dropdown_link"
-              onClick={() => settoggleDropdown(false)}
+              onClick={() =>{settoggleDropdown2(false)}}
             >
               Mugs
             </Link>
