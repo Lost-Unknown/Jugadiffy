@@ -6,10 +6,7 @@ import Nav from "@components/Nav";
 import Provider from "@components/Provider";
 import Footer from "@components/Footer";
 import { NextUIProvider } from "@nextui-org/react";
-export const metadata = {
-  title: "Jugadiffy",
-  description: "Jugadiffy",
-};
+
 
 const RootLayout = ({ children }) => {
   return (
