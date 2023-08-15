@@ -58,14 +58,22 @@ const handler = NextAuth({
       return session;
     },
 
-    async signIn({ provider, profile, email, password }) {
+    async signIn({ provider, profile, email}) {
       try {
         await connectToDB();
-        const userExists = await User.findOne({
-          email: profile ? profile.email : email,
+        let findemail;
+    
+        if (provider === "google") {
+          findemail = profile.email;
+        } else {
+          findemail = email;
+        }
+    
+        let user = await User.findOne({
+          email: findemail,
         });
-
-        if (!userExists) {
+    
+        if (!user) {
           const dob = profile?.birthday || "1970-01-01";
           const newUser = new User({
             email: profile ? profile.email : email,

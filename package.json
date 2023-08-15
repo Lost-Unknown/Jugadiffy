@@ -11,7 +11,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
+    "@nextui-org/react": "^2.0.19",
     "autoprefixer": "10.4.14",
+    "framer-motion": "^10.15.2",
     "lodash.debounce": "^4.0.8",
     "mongod": "^2.0.0",
     "mongoose": "^7.4.1",

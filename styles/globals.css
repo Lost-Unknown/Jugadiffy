@@ -152,7 +152,7 @@
 }
 
 .dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white border border-black min-w-[210px] flex flex-col gap-2 justify-start items-start;
+  @apply absolute z-50 right-0 top-full mt-3 w-full p-5 rounded-lg bg-white border border-black min-w-[210px] flex flex-col gap-2 justify-start items-start;
 }
 
 .dropdownDesktop {
@@ -201,4 +201,24 @@
 
 .p-card{
   aspect-ratio: 1/1.5;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffffff00;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #cacaca;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

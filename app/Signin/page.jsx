@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import {Input} from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { signIn, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,10 @@ function Signin() {
   const router = useRouter();
   const { data: session } = useSession();
   const [providers, setProviders ] = useState(null);
+  
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   const handleSignIn = async (e) => {
     e.preventDefault();
@@ -18,7 +22,7 @@ function Signin() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     await signIn("credentials",{
-      email:email,
+      email:email.toLowerCase(),
       password:password,
       redirect:false
     })
@@ -69,32 +73,21 @@ function Signin() {
                 <div className="flex w-2/5 border-b-2 border-zinc-700"></div>
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-zinc-800"
-                >
-                  Email address
-                </label>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="email"
+                    label="Email"
                     name="email"
                     type="email"
+                    variant="bordered"
                     autoComplete="email"
                     required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-950 shadow-sm ring-1 ring-inset ring-zinc-950 placeholder:text-zinc-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
-                  />
+                    />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-zinc-800"
-                  >
-                    Password
-                  </label>
+                <div className="flex items-end justify-end">
                   <div className="text-sm">
                     <a
                       href="#"
@@ -105,12 +98,38 @@ function Signin() {
                   </div>
                 </div>
                 <div className="mt-2">
-                  <input
-                    id="password"
+                <Input
+                  id="password"
+                    label="Password"
                     name="password"
-                    type="password"autoComplete="current-password"
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-950 shadow-sm ring-1 ring-inset ring-zinc-950 placeholder:text-zinc-700 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    variant="bordered"
+                    isRequired
+                    endContent={
+                      <button
+                        className="focus:outline-none"
+                        type="button"
+                        onClick={toggleVisibility}
+                      >
+                        {isVisible ? (
+                          <Image
+                            src={"/assets/images/eyeslash.svg"}
+                            alt="eyeslash"
+                            width={20}
+                            height={20}
+                            className=" pointer-events-none"
+                          />
+                        ) : (
+                          <Image
+                            src={"/assets/images/eye.svg"}
+                            alt="eye"
+                            width={20}
+                            height={20}
+                            className=" pointer-events-none"
+                          />
+                        )}
+                      </button>
+                    }
+                    type={isVisible ? "text" : "password"}
                   />
                 </div>
               </div>

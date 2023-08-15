@@ -1,10 +1,9 @@
 "use client";
-
-import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function Nav() {
   const router = useRouter();
@@ -13,6 +12,7 @@ function Nav() {
   const [toogleDropdown, settoggleDropdown] = useState(false);
   const [toogleDropdown2, settoggleDropdown2] = useState(false);
   const [toogleDropdownDesktop, settoggleDropdownDesktop] = useState(false);
+  const [searchtext, setSearchtext] = useState({ text: "" });
 
   useEffect(() => {
     const setUpProviders = async () => {
@@ -58,13 +58,26 @@ function Nav() {
             Mugs
           </Link>
         </div>
-        <form className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-500 rounded-xl overflow-hidden bg-zinc-200 focus:ring-zinc-700 flex-center w-1/3 h-full">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            router.replace(
+              `/search?product=${searchtext.text
+                .toLowerCase()
+                .replace(" ", "_")}`
+            );
+          }}
+          className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-500 rounded-xl overflow-hidden bg-zinc-200 focus:ring-zinc-700 flex-center w-1/3 h-full"
+        >
           <input
             type="text"
             placeholder="Search for Products"
-            onChange={() => {}}
+            value={searchtext.text}
+            onChange={(e) =>
+              setSearchtext({ ...searchtext, text: e.target.value })
+            }
             required
-            className="search-icon bg-zinc-200  placeholder:text-zinc-700 p-2 pl-4 pr-4 text-zinc-700 focus:outline-0 w-full text-md"
+            className="search-icon bg-zinc-200  p-2 pl-4 pr-4 placeholder:text-zinc-600 text-zinc-700 focus:outline-0 w-full text-md"
           />
         </form>
         {session?.user ? (
@@ -141,12 +154,25 @@ function Nav() {
           className=" rounded-lg text-zinc-700"
         />
         {toogleDropdown2 && (
-          <div className="dropdown z-10 transition  duration-200">
-            <form className=" sm:flex hidden relative overflow-hidden bg-zinc-200 pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-800 rounded-xl  focus:ring-zinc-700 flex-center w-full h-full">
+          <div className="dropdown  z-10 ">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                router.replace(
+                  `/search?product=${searchtext.text
+                    .toLowerCase()
+                    .replace(" ", "_")}`
+                );
+              }}
+              className=" sm:flex hidden relative pr-2 focus:ring-2 focus:ring-offset-2 border border-zinc-500 rounded-xl overflow-hidden bg-zinc-200 focus:ring-zinc-700 flex-center w-full h-full"
+            >
               <input
                 type="text"
                 placeholder="Search for Products"
-                onChange={() => {}}
+                value={searchtext.text}
+                onChange={(e) =>
+                  setSearchtext({ ...searchtext, text: e.target.value })
+                }
                 required
                 className="search-icon bg-zinc-200  p-2 pl-4 pr-4 placeholder:text-zinc-600 text-zinc-700 focus:outline-0 w-full text-md"
               />
@@ -154,22 +180,27 @@ function Nav() {
             <Link
               href="/search?category=all"
               className="dropdown_link"
-              onClick={() =>{settoggleDropdown2(false)}}
+              onClick={() => {
+                settoggleDropdown2(false);
+              }}
             >
               All
             </Link>
             <Link
               href="/search/?category=Shirt"
               className="dropdown_link"
-              onClick={() =>{settoggleDropdown2(false)}}
-
+              onClick={() => {
+                settoggleDropdown2(false);
+              }}
             >
               Shirts
             </Link>
             <Link
               href="/search?category=Mugs"
               className="dropdown_link"
-              onClick={() =>{settoggleDropdown2(false)}}
+              onClick={() => {
+                settoggleDropdown2(false);
+              }}
             >
               Mugs
             </Link>

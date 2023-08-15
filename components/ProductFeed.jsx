@@ -21,9 +21,15 @@ const ProductCardList = ({data}) => {
   )
 }
 
-const ProductFeed = ({category}) => {
+const ProductFeed = ({category,product}) => {
     const [ posts,setPosts] = useState([]);
-    const apiUrl = category === "all" ? "/api/product" : `/api/search/${category}`;
+    let apiUrl;
+    if(category==null){
+    apiUrl =  `/api/search2/${product}`;
+    }
+    else if(product == null){
+    apiUrl = category === "all" ? "/api/product" : `/api/search/${category}`;
+    }
     useEffect(() => {
       const fetchPosts = async () => {
 
@@ -32,7 +38,7 @@ const ProductFeed = ({category}) => {
           setPosts(data);
       };
       fetchPosts();  
-    },[]);
+    },[apiUrl]);
     return (
         <section className="w-full">
           <ProductCardList

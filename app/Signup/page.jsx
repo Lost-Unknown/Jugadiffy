@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
+import { Input } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import { signIn, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,10 @@ function Signup() {
     password: "",
     dob: new Date(),
   });
+
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -34,14 +38,14 @@ function Signup() {
         body: JSON.stringify({
           username: post.username,
           password: post.password,
-          email: post.email,
+          email: post.email.toLowerCase(),
           dob: post.dob,
         }),
       });
 
       if (response.ok) {
         console.log("User Successfully created! \n" + response);
-        router.push("/");
+        router.push("/signin");
       }
     } catch (error) {
       console.log(error);
@@ -85,112 +89,111 @@ function Signup() {
                 <div className="flex w-2/5 border-b-2 border-zinc-700"></div>
               </div>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-zinc-800"
-                >
-                  Username
-                </label>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="email"
                     name="email"
+                    label="Username"
+                    variant="bordered"
                     value={post.username}
                     onChange={(e) =>
                       setPost({ ...post, username: e.target.value })
                     }
                     type="text"
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    isRequired
                   />
                 </div>
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-zinc-800"
-                >
-                  Your Email
-                </label>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="email"
                     name="email"
                     type="email"
+                    label="Email"
+                    variant="bordered"
                     value={post.email}
                     onChange={(e) =>
                       setPost({ ...post, email: e.target.value })
                     }
                     autoComplete="email"
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    isRequired
                   />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-zinc-800"
-                  >
-                    Password
-                  </label>
-                </div>
+                <div className="flex items-center justify-between"></div>
                 <div className="mt-2">
-                  <input
-                    id="password"
+                  <Input
+                  id="password"
+                    label="Password"
                     name="password"
-                    type="password"
+                    variant="bordered"
+                    isRequired
+                    
                     value={post.password}
                     onChange={(e) =>
                       setPost({ ...post, password: e.target.value })
                     }
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    endContent={
+                      <button
+                        className="focus:outline-none"
+                        type="button"
+                        onClick={toggleVisibility}
+                      >
+                        {isVisible ? (
+                          <Image
+                            src={"/assets/images/eyeslash.svg"}
+                            alt="eyeslash"
+                            width={20}
+                            height={20}
+                            className=" pointer-events-none"
+                          />
+                        ) : (
+                          <Image
+                            src={"/assets/images/eye.svg"}
+                            alt="eye"
+                            width={20}
+                            height={20}
+                            className=" pointer-events-none"
+                          />
+                        )}
+                      </button>
+                    }
+                    type={isVisible ? "text" : "password"}
                   />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-zinc-800"
-                  >
-                    Confirm Password
-                  </label>
-                </div>
+                <div className="flex items-center justify-between"></div>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="password"
+                    label="Confirm Password"
                     name="password"
                     type="text"
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholder:text-zinc-600 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    isRequired
+                    variant="bordered"
                   />
                 </div>
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    For="date"
-                    className="block text-sm font-medium leading-6 text-zinc-800"
-                  >
-                    Date Of Birth
-                  </label>
-                </div>
+                <div className="flex items-center justify-between"></div>
                 <div className="mt-2">
-                  <input
+                  <Input
                     id="date"
                     name="date"
                     type="date"
+                    label="Date of Birth"
+                    placeholder="dd-mm-yyyy"
                     value={post.date}
                     onChange={(e) => setPost({ ...post, date: e.target.value })}
-                    required
-                    className="block w-full md:rounded-md rounded-xl border-0 py-1.5 text-zinc-600 shadow-sm ring-1 ring-inset ring-zinc-800 placeholde:text-zinc-600 :ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 bg-slate-100 pl-1 "
+                    isRequired
+                    variant="bordered"
                   />
                 </div>
               </div>
