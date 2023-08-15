@@ -1,33 +1,114 @@
-"use client"
+"use client";
 import ProductCard from "@components/ProductCard";
-import ProductFeed from "@components/ProductFeed";
+import Image from "next/image";
+import { Carousel,IconButton } from "@material-tailwind/react";
 const Home = () => {
   return (
     <section>
-    <div className=" md:flex-row flex-col w-full flex-center  gap-4 h-max flex  overflow-hidden">
-      <div className="md:w-2/3 w-full">
-        <ProductCard
-          Name="Product 4"
-          Price="1000000"
-          Url="64cb66b2ba333e53bfb2c22d"
-          ImageUrl="/assets/images/shoes-1.png"
-         />
-       </div>
-      <div className="flex items-center justify-center flex-col gap-4  md:w-1/3 w-full h-auto">
-        <ProductCard
-          Name="Product 5"
-          Price="1000000"
-          Url="64cb69beba333e53bfb2c238"
-          ImageUrl="/assets/images/shoes-1.png"
-         / >
-        <ProductCard
-          Name="Product 1"
-          Price="10000"
-          Url="64cb750bec1f6ef97018eeb0"
-          ImageUrl="https://demo.vercel.store/_next/image?url=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0754%2F3727%2F7491%2Ffiles%2Fbag-1-dark.png%3Fv%3D1689796304&w=1200&q=75"
-         / >
-        </div>
-      </div>
+      <Carousel
+        className="rounded-xl"
+        navigation={({ setActiveIndex, activeIndex, length }) => (
+          <div className="absolute bottom-4 left-2/4 z-50 flex -translate-x-2/4 gap-2">
+            {new Array(length).fill("").map((_, i) => (
+              <span
+                key={i}
+                className={`block h-1 cursor-pointer rounded-2xl transition-all content-[''] ${
+                  activeIndex === i ? "w-8 bg-white" : "w-4 bg-white/50"
+                }`}
+                onClick={() => setActiveIndex(i)}
+              />
+            ))}
+          </div>
+        )}
+        prevArrow={({ handlePrev }) => (
+          <IconButton
+            variant="text"
+            color="white"
+            size="lg"
+            onClick={handlePrev}
+            className="!absolute top-2/4 left-4 -translate-y-2/4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+              />
+            </svg>
+          </IconButton>
+        )}
+        nextArrow={({ handleNext }) => (
+          <IconButton
+            variant="text"
+            color="white"
+            size="lg"
+            onClick={handleNext}
+            className="!absolute top-2/4 !right-4 -translate-y-2/4"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+              />
+            </svg>
+          </IconButton>
+        )}
+      >
+        <Image
+          className="w-full h-unit-8xl"
+          src="/assets/images/test.avif"
+          width={800}
+          height={400}
+          alt="image1"
+        />
+
+        <Image
+          className="w-full h-unit-8xl"
+          src="/assets/images/test.avif"
+          width={800}
+          height={400}
+          alt="image2"
+        />
+
+        <Image
+          className="w-full h-unit-8xl"
+          src="/assets/images/test.avif"
+          width={800}
+          height={400}
+          alt="image3"
+        />
+
+        <Image
+          className="w-full h-unit-8xl"
+          src="/assets/images/test.avif"
+          width={800}
+          height={400}
+          alt="image4"
+        />
+
+        <Image
+          className="w-full h-unit-8xl"
+          src="/assets/images/test.avif"
+          width={800}
+          height={400}
+          alt="image5"
+        />
+      </Carousel>
     </section>
   );
 };
