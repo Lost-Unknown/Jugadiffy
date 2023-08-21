@@ -2,7 +2,6 @@
 import React from "react";
 import ProductFeed from "@components/ProductFeed";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
 import Link from "next/link";
 import {CheckboxGroup, Checkbox} from "@nextui-org/react";
 import {
@@ -19,7 +18,7 @@ const Search = () => {
   const product = searchParams.get("product");
 
   return (
-    <section>
+    <section className="px-2">
       {/* Mobile Search */}
       <div className="md:hidden flex flex-col gap-2 justify-center items-center">
         <Dropdown className="w-full">

@@ -14,7 +14,7 @@ const RootLayout = ({ children }) => {
       <NextUIProvider>
       <body className=" bg-neutral-100 py-0 mt-0">
         <Provider>
-          <main className="w-full pr-4 pl-4">
+          <main className="w-full">
             <Nav />
             {children}
           </main>

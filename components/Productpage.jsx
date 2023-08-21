@@ -1,8 +1,10 @@
-import Image from "next/image";
+
 import ChipList from "./ColourList";
 import { useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import ProductImage from "./ProductImage";
+
 
 const ProductPage = ({ post, setPost }) => {
   const { data: session } = useSession();
@@ -60,22 +62,17 @@ const ProductPage = ({ post, setPost }) => {
     <section className="w-full">
       <div className="flex w-full md:flex-row flex-col p-1 bg-white rounded-xl">
         <div className=" md:w-3/5 w-full flex flex-center">
-          <Image
-            src={post.image[0]}
-            width={800}
-            height={800}
-            className="aspect-square"
-          />
+        <ProductImage data={post.image} />
         </div>
         <div className=" md:w-2/5 w-full flex flex-col gap-1 md:p-16 p-4">
           <h2 className=" text-zinc-800 text-5xl font-semibold font-sans">
             {post.pname}
           </h2>
           <div className="flex py-0.5 gap-2 items-end">
-            <p className="text-black text-xl">₹{post.price}</p>
-            <p className="text-zinc-700 text-lg line-through">{post.price2}</p>
+            <p className="text-black font-semibold text-xl">₹{post.price}</p>
+            <p className="text-zinc-500 text-lg line-through">₹{post.price2}</p>
             <p className="text-green-500 text-xl font-semibold">
-              {(post.price2 / post.price) * 100 - 100}% off
+              {(post.price2 / post.price) * 100 - 100}% Off
             </p>
           </div>
           <hr className="mt-4 mb-8 border-zinc-600" />

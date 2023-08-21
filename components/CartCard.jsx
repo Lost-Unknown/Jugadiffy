@@ -5,6 +5,7 @@ const CartCard = ({
   _id,
   pname,
   price,
+  price2,
   quantity,
   image,
   size,
@@ -25,51 +26,57 @@ const CartCard = ({
     removeFromCart(_id);
   };
   return (
-    <div className="flex w-full px-6 py-2 sm:h-40 max-h-fit flex-col sm:flex-row rounded-xl justify-center items-center bg-slate-100 border border-zinc-300">
+    <div className="flex h-40 w-full py-2 justify-start">
       <Image
         src={image}
         alt="ProductImage"
         width={400}
         height={400}
-        className="sm:h-full h-full sm:w-36 w-full bg-zinc-600 overflow-hidden rounded-md"
+        className="h-full w-36"
       />
-      <div className="pl-2 sm:h-full sm:w-auto w-full  h-24  text-left gap-2">
-        <div className="">
-          <h2 className="font-semibold text-2xl">{pname}</h2>
-          <h2 className="text-xl">₹{price}</h2>
+      <div className="flex flex-col w-full">
+        <div className="pl-2 text-left gap-2">
+            <h2 className="font-semibold text-xl">{pname}</h2>
+          <div className=" flex gap-2">
+            <h2 className="text-md font-bold">₹{price}</h2>
+            <h2 className="text-md text-zinc-500 font-semibold line-through">₹{price2}</h2>
+            <h2 className="text-md font-bold text-green-500">{(price2/price)*100 -100}% Off</h2>
+          </div>
+          <div className="flex w-full flex-col justify-start   ">
+            <div className="flex items-center">
+              <h1 className="text-md text-zinc-400 pr-1">Colour:</h1>
+              <h1 className="text-md"> {color}</h1>
+            </div>
+            <div className="flex items-center">
+              <h1 className="text-md text-zinc-400 pr-1">Size:</h1>
+              <h1 className="text-md"> {size}</h1>
+            </div>
+          </div>
         </div>
-        <div className="flex w-full sm:flex-col mb-12 md:justify-start justify-between md:mb-0 flex-row ">
-          <h1 className="text-lg">Colour: {color}</h1>
-          <h1 className="text-lg">Size: {size}</h1>
-        </div>
-      </div>
-      <div className="sm:flex-grow "></div>
-      <div className="flex flex-row sm:flex-col gap-6">
-        <div className="flex overflow-hidden rounded-md justify-center items-center">
-          <button
-            className="bg-zinc-200 text-center w-10 font-bold h-8"
-            onClick={handleDecrease}
-          >
-            -
-          </button>
-          <p className="border-2 text-center border-zinc-300 w-10 p-1 px-3">{quantity}</p>
-          <button
-            className="bg-zinc-200 text-center w-10 font-bold h-8"
-            onClick={handleIncrease}
-          >
-            +
-          </button>
-        </div>
-        <div className="flex items-center justify-end gap-2 sm:gap-6">
-          <p className="font-semibold text-lg">₹{quantity * price}</p>
-          <Image
-            src="/assets/images/cross.svg"
-            width={30}
-            height={30}
-            alt="cross"
-            className="cursor-pointer"
-            onClick={handleRemove}
-          />
+        <div className=" flex-grow"></div>
+        <div className="flex flex-row justify-between gap-6 px-2">
+          <div className="flex border border-zinc-400 overflow-hidden rounded-md justify-center items-center">
+            <button
+              className=" text-center sm:w-10 w-6 font-bold h-6 md:h-8"
+              onClick={handleDecrease}
+            >
+              -
+            </button>
+            <p className=" text-center  sm:w-10 w-6 p-1  border-l border-zinc-400">
+              {quantity}
+            </p>
+            <button
+              className=" text-center sm:w-10 w-6 font-bold h-6 md:h-8 border-l border-zinc-400"
+              onClick={handleIncrease}
+            >
+              +
+            </button>
+          </div>
+          <div className="flex items-center justify-end gap-2 sm:gap-6">
+            <button className="cursor-pointer text-blue-800 underline font-semibold underline-offset-2" onClick={handleRemove}>
+              Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>

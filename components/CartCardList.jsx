@@ -9,6 +9,7 @@ const CartCardList = ({ data,removeFromCart,increaseQuantity,decreaseQuantity })
         _id={post._id}
         pname={post.Productid.pname}
         price={post.Productid.price}
+        price2 = {post.Productid.price2}
         quantity={post.quantity}
         size= {post.size}
         color = {post.colour}

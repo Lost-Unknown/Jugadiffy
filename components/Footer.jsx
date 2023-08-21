@@ -58,6 +58,36 @@ const Footer = () => {
             FAQ
           </Link>
         </div>
+        <div className=" flex-grow"></div>
+        <div className="md:pr-24 flex md:w-auto pr-4 w-full flex-col">
+          <p className="text-zinc-200 font-semibold text-center text-md">Get in Touch</p>
+          <div className="flex gap-3 justify-center">
+            <Link href="https://instagram.com/jugaadify.india?utm_source=qr&igshid=ZDc4ODBmNjlmNQ%3D%3D">
+              <Image
+                src={"assets/images/insta.svg"}
+                width={25}
+                height={25}
+                className=" cursor-pointer"
+              />
+            </Link>
+            <Link href="https://www.facebook.com/profile.php?id=100093572324594&mibextid=b06tZ0">
+              <Image
+                src={"assets/images/facebook.svg"}
+                width={25}
+                height={25}
+                className=" cursor-pointer"
+              />
+            </Link>
+            <Link href="https://api.whatsapp.com/send/?phone=918860510084">
+              <Image
+                src={"assets/images/whats.svg"}
+                width={25}
+                height={25}
+                className=" cursor-pointer"
+              />
+            </Link>
+          </div>
+        </div>
       </div>
       <hr className=" border-zinc-500" />
       <div className="md:flex-row  flex-col flex gap-2 pt-3 pb-3 text-zinc-200 flex-center">

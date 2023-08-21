@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard"
 
 const ProductCardList = ({data}) => {
   return (
-    <div className='grid  md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 w-full h-auto'>
+    <div className='grid  md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-1 w-full h-auto'>
       {data.map((post) => (
         <ProductCard
           key={post._id}

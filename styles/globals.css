@@ -204,7 +204,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  display: none;
 }
 
 /* Track */
@@ -221,4 +221,12 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.h-cart1{
+  height: 10%;
+}
+
+.h-cart2{
+  height: 78%;
 }
