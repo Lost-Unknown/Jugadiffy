@@ -121,7 +121,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="    http://nobero.com/cdn/shop/collections/hoodie.png?v=1689157352 "
+                src="http://nobero.com/cdn/shop/collections/hoodie.png?v=1689157352 "
               />
               <p className=" w-full text-center font-semibold">
                 Hoodies
@@ -133,7 +133,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="   http://nobero.com/cdn/shop/files/1m_2.png?v=1689745471"
+                src="http://nobero.com/cdn/shop/files/1m_2.png?v=1689745471"
               />
               <p className="  w-full text-center font-semibold ">
                 T-Shirts
@@ -159,7 +159,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="    http://nobero.com/cdn/shop/collections/10.jpg?v=1679917593 "
+                src="http://nobero.com/cdn/shop/collections/10.jpg?v=1679917593 "
               />
               <p className=" w-full text-center font-semibold  ">
                 Joggers
@@ -185,7 +185,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="   http://nobero.com/cdn/shop/files/fashleasure.png?v=1686034040"
+                src="http://nobero.com/cdn/shop/files/fashleasure.png?v=1686034040"
               />
               <p className=" w-full text-center font-semibold  ">
                 Fashleisure Edit
@@ -198,7 +198,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="   http://nobero.com/cdn/shop/files/texture_edit_3.png?v=1686034146"
+                src="http://nobero.com/cdn/shop/files/texture_edit_3.png?v=1686034146"
               />
               <p className=" w-full text-center font-semibold  ">
                 Textured Co-ords
@@ -224,7 +224,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="    http://nobero.com/cdn/shop/collections/11_303ebb63-5abc-41db-ba82-468445c8f2d8.jpg?v=1679917779 "
+                src="http://nobero.com/cdn/shop/collections/11_303ebb63-5abc-41db-ba82-468445c8f2d8.jpg?v=1679917779 "
               />
               <p className=" w-full text-center font-semibold">
                 Luxury Co-ords
@@ -237,7 +237,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
-                src="   http://nobero.com/cdn/shop/files/blush_2.png?v=1684928509"
+                src="http://nobero.com/cdn/shop/files/blush_2.png?v=1684928509"
               />
               <p className=" w-full text-center font-semibold">
                 Plus Size Tees
