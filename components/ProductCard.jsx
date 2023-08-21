@@ -7,7 +7,7 @@ const ProductCard = ({ Name, Price, Price2, Url, ImageUrl, Colour, Size }) => {
   return (
     <div
       onClick={() => router.push(`/product/?id=${Url}`)}
-      className="flex items-Start flex-col h-unit-7xl bg-white justify-center p-card  cursor-pointer w-full"
+      className="flex items-Start flex-col md:h-unit-7xl h-unit-6xl bg-white justify-center p-card cursor-pointer w-full"
     >
       <div className="hidden">{Colour}</div>
       <div className="hidden">{Size}</div>
