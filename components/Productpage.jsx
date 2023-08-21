@@ -112,6 +112,17 @@ const ProductPage = ({ post, setPost }) => {
             >
               {Added ?("Added to Cart") : (submitting ? "Adding to Cart..." : "Add To Cart")}
             </button>
+            <button
+              className={`w-full rounded-full pt-4 pb-4 text-white ${
+                isAddToCartDisabled
+                  ? "bg-gray-300 cursor-not-allowed"
+                  : "bg-blue-600"
+              }`}
+              disabled={isAddToCartDisabled || submitting}
+              onClick={()=>window.open(`https://wa.me/918860510084?text=Hello%20Jugaadify%20${'I would like to place an order for the'}%20${post.pname}%20${'of colour'}%20${selectedColour}%20${'and size'}%20${selectedSize}`)}
+            >
+              {Added ?("Order Placed") : (submitting ? "Placing Order" : "Buy Now")}
+            </button>
             <p className="text-zinc-800">{post.desc}</p>
           </form>
         </div>

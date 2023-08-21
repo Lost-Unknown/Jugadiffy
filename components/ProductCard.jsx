@@ -11,7 +11,7 @@ const ProductCard = ({ Name, Price, Price2, Url, ImageUrl, Colour, Size }) => {
     >
       <div className="hidden">{Colour}</div>
       <div className="hidden">{Size}</div>
-      <div className="flex overflow-hidden h-5/6">
+      <div className="flex overflow-hidden md:h-5/6">
         <Image
           src={ImageUrl}
           width={800}
@@ -19,14 +19,14 @@ const ProductCard = ({ Name, Price, Price2, Url, ImageUrl, Colour, Size }) => {
           className="hover:scale-110 h-full transition scale-100 duration-300 w-full"
         />
       </div>
-      <div className="flex flex-col h-1/6 p-0.5 pt-4  w-full bg-white">
-        <p className="font-semibold text-black text-md text-left pl-3 py-0.5 ">
+      <div className="flex flex-col h-1/6 p-0.5  w-full bg-white">
+        <p className="font-semibold text-black md:text-md text-sm text-left pl-3 py-0.5 ">
           {Name}
         </p>
-        <div className="flex pl-3 py-0.5 gap-2 items-end">
-          <p className="text-black text-md">₹{Price}</p>
-          <p className="text-zinc-700 text-sm line-through">{Price2}</p>
-          <p className="text-green-500 text-md font-semibold">{((Price2/Price)*100)-100}% off</p>
+        <div className="flex pl-3 md:py-0.5 py-0  gap-2 items-end">
+          <p className="text-black md:text-md text-sm">₹{Price}</p>
+          <p className="text-zinc-700 md:text-sm line-through">{Price2}</p>
+          <p className="text-green-500 md:text-md text-sm  font-semibold">{((Price2/Price)*100)-100}% off</p>
         </div>
       </div>
     </div>

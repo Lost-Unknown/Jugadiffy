@@ -160,7 +160,7 @@ const Search = () => {
             <CheckboxGroup>
               <Dropdown>
                 <DropdownTrigger>
-                  <Button variant="bordered" className="w-full">Price</Button>
+                  <Button variant="bordered" className="w-full">Size</Button>
                 </DropdownTrigger>
                 <DropdownMenu closeOnSelect={false}>
                   <DropdownItem>
@@ -294,7 +294,7 @@ const Search = () => {
             <CheckboxGroup>
               <Dropdown>
                 <DropdownTrigger>
-                  <Button variant="bordered">Price</Button>
+                  <Button variant="bordered">Size</Button>
                 </DropdownTrigger>
                 <DropdownMenu closeOnSelect={false}>
                   <DropdownItem>
