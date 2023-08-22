@@ -1,5 +1,4 @@
 import mongoose, { Schema, model, models } from "mongoose";
-import Order from "./order";
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -55,14 +54,6 @@ const UserSchema = new Schema({
       },
       colour: String,
       size: String,
-    },
-  ],
-  orders: [
-    {
-      order: {
-        type: Schema.Types.ObjectId,
-        ref: "Order", // This should be a string with the name of the model
-      },
     },
   ],
 });

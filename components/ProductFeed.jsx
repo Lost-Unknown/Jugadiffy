@@ -3,9 +3,15 @@ import { useState,useEffect } from "react"
 import ProductCard from "./ProductCard"
 
 const ProductCardList = ({data}) => {
+  const isListEmpty = data.length ===0;
   return (
+    <section>
+      {isListEmpty ? (
+      <div className="flex justify-center items-center h-96 w-full">
+        <img className="w-full h-full object-contain" src="assets/images/noitem.png" alt="" />
+      </div>):(
     <div className='grid  md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-1 w-full h-auto'>
-      {data.map((post) => (
+        {data.map((post) => (
         <ProductCard
           key={post._id}
           Name = {post.pname}
@@ -17,7 +23,9 @@ const ProductCardList = ({data}) => {
           Size = {post.size}
         />
       ))}
-    </div>
+      </div>
+      )}
+      </section>
   )
 }
 

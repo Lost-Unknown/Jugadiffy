@@ -1,26 +1,19 @@
-"use client"
+"use client";
 import "@styles/globals.css";
-import { children } from "react";
-import Home from "@app/page";
 import Nav from "@components/Nav";
-import Provider from "@components/Provider";
 import Footer from "@components/Footer";
 import { NextUIProvider } from "@nextui-org/react";
-
-
 const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <NextUIProvider>
-      <body className=" bg-neutral-100 py-0 mt-0">
-        <Provider>
-          <main className="w-full">
-            <Nav />
-            {children}
-          </main>
-          <Footer />
-        </Provider>
-      </body>
+          <body className=" bg-neutral-100 py-0 mt-0">
+            <main className="w-full">
+              <Nav />
+              {children}
+            </main>
+            <Footer />
+          </body>
       </NextUIProvider>
     </html>
   );

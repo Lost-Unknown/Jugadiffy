@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <section>
       <Carousel
-        className=" p-0 m-0"
+        className=" p-0 m-0 md:h-unit-8xl sm:h-60 h-44"
         navigation={({ setActiveIndex, activeIndex, length }) => (
           <div className="absolute bottom-4 left-2/4 z-40 flex -translate-x-2/4 gap-2">
             {new Array(length).fill("").map((_, i) => (
@@ -71,7 +71,7 @@ const Home = () => {
         )}
       >
         <Image
-          className="w-full h-unit-8xl"
+          className="w-full h-full object-fill"
           src="/assets/images/test.avif"
           width={800}
           height={400}
@@ -79,7 +79,7 @@ const Home = () => {
         />
 
         <Image
-          className="w-full h-unit-8xl"
+          className="w-full h-full  object-fill"
           src="/assets/images/test.avif"
           width={800}
           height={400}
@@ -87,7 +87,7 @@ const Home = () => {
         />
 
         <Image
-          className="w-full h-unit-8xl"
+          className="w-full h-full  object-fill"
           src="/assets/images/test.avif"
           width={800}
           height={400}
@@ -95,7 +95,7 @@ const Home = () => {
         />
 
         <Image
-          className="w-full h-unit-8xl"
+          className="w-full h-full  object-fill"
           src="/assets/images/test.avif"
           width={800}
           height={400}
@@ -103,7 +103,7 @@ const Home = () => {
         />
 
         <Image
-          className="w-full h-unit-8xl"
+          className="w-full h-full  object-fill"
           src="/assets/images/test.avif"
           width={800}
           height={400}

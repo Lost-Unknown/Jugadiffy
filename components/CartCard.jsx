@@ -1,19 +1,31 @@
+"use client"
 import React from "react";
 import Image from "next/image"; // Make sure to import the Image component
-
+import { useEffect ,useState } from "react";
 const CartCard = ({
   _id,
-  pname,
-  price,
-  price2,
   quantity,
-  image,
   size,
   color,
   removeFromCart,
   increaseQuantity,
   decreaseQuantity,
 }) => {
+  const [post,setPost] = useState({pname:"",price:"",price2:"",image:""})
+  useEffect(() => {
+    const getProductDetails = async () => {
+      const response = await fetch(`/api/product/${_id}`);
+      const data = await response.json();
+      setPost({
+        pname : data.pname,
+        price : data.price,
+        price2 : data.price2,
+        image : data.image[0]
+    })
+    };
+
+    getProductDetails();
+  }, [_id]);
   const handleIncrease = () => {
     increaseQuantity(_id);
   };
@@ -28,7 +40,7 @@ const CartCard = ({
   return (
     <div className="flex h-40 w-full py-2 justify-start">
       <Image
-        src={image}
+        src={post.image}
         alt="ProductImage"
         width={400}
         height={400}
@@ -36,11 +48,15 @@ const CartCard = ({
       />
       <div className="flex flex-col w-full">
         <div className="pl-2 text-left gap-2">
-            <h2 className="font-semibold text-xl">{pname}</h2>
+          <h2 className="font-semibold text-xl">{post.pname}</h2>
           <div className=" flex gap-2">
-            <h2 className="text-md font-bold">₹{price}</h2>
-            <h2 className="text-md text-zinc-500 font-semibold line-through">₹{price2}</h2>
-            <h2 className="text-md font-bold text-green-500">{(price2/price)*100 -100}% Off</h2>
+            <h2 className="text-md font-bold">₹{post.price}</h2>
+            <h2 className="text-md text-zinc-500 font-semibold line-through">
+              ₹{post.price2}
+            </h2>
+            <h2 className="text-md font-bold text-green-500">
+              {(post.price2 / post.price) * 100 - 100}% Off
+            </h2>
           </div>
           <div className="flex w-full flex-col justify-start   ">
             <div className="flex items-center">
@@ -73,7 +89,10 @@ const CartCard = ({
             </button>
           </div>
           <div className="flex items-center justify-end gap-2 sm:gap-6">
-            <button className="cursor-pointer text-blue-800 underline font-semibold underline-offset-2" onClick={handleRemove}>
+            <button
+              className="cursor-pointer text-blue-800 underline font-semibold underline-offset-2"
+              onClick={handleRemove}
+            >
               Remove
             </button>
           </div>

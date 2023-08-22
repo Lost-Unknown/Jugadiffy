@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { signOut, useSession, getProviders } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Drawer, Typography, IconButton } from "@material-tailwind/react";
@@ -9,17 +8,8 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Input } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
 import CartCardList from "./CartCardList";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
-
 function Nav() {
   const router = useRouter();
-  const { data: session } = useSession();
-  const [providers, setProviders] = useState(null);
   const [searchtext, setSearchtext] = useState({ text: "" });
   const [openRight, setOpenRight] = useState(false);
   const [openLeft, setOpenLeft] = useState(false);
@@ -28,119 +18,97 @@ function Nav() {
   const openDrawerLeft = () => setOpenLeft(true);
   const closeDrawerLeft = () => setOpenLeft(false);
   const [posts, setPosts] = useState([]);
-  const [UserId, setUserId] = useState(null);
-  useEffect(() => {
-    // Set the userId when the session data is available
-    if (session?.user?.id) {
-      setUserId(session.user.id);
-    }
-  }, [session?.user?.id]);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        if (UserId) {
-          const response = await fetch(`/api/cart/${UserId}`);
-          if (!response.ok) {
-            // Handle the case when the response is not successful (e.g., 404 or 500)
-            console.error("Error fetching cart items:", response.statusText);
-            return;
-          }
-          const data = await response.json();
-          setPosts(data.cart);
+    const fetchItems = () => {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartArray = [];
+
+      for (const key in cart) {
+        if (key !== "num" && cart.hasOwnProperty(key)) {
+          cartArray.push(cart[key]);
         }
-      } catch (error) {
-        console.error("Error fetching cart items:", error);
       }
+
+      setPosts(cartArray);
     };
 
-    // Call fetchItems when userId is available
-    if (UserId) {
+    if (typeof window !== "undefined") {
+      // Ensure localStorage operations are only done on the client side
       fetchItems();
     }
-  }, [UserId]);
-  const removeFromCart = async (itemId) => {
-    try {
-      const response = await fetch(`/api/cart/${itemId}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        // Remove the item from posts state
-        setPosts(posts.filter((post) => post._id !== itemId));
-        console.log("Cart item removed successfully");
-      } else {
-        console.error("Failed to remove cart item");
-      }
-    } catch (error) {
-      console.error("Error removing cart item:", error);
-    }
-  };
-  const increaseQuantity = async (itemId) => {
-    try {
-      const updatedPosts = posts.map((post) => {
-        if (post._id === itemId) {
-          post.quantity += 1;
-        }
-        return post;
-      });
-
-      const response = await fetch(`/api/cart/${itemId}/increase`, {
-        method: "PUT", // Use the PUT method for updates
-      });
-
-      if (response.ok) {
-        setPosts(updatedPosts);
-        // You can show a success message or update the UI accordingly
-        console.log("Cart item quantity increased in the database");
-      } else {
-        // Handle error response from the server
-        console.error("Failed to increase cart item quantity in the database");
-      }
-    } catch (error) {
-      console.error(
-        "An error occurred while increasing cart item quantity:",
-        error
-      );
-    }
-  };
-
-  const decreaseQuantity = async (itemId) => {
-    try {
-      const updatedPosts = posts.map((post) => {
-        if (post._id === itemId && post.quantity > 1) {
-          post.quantity -= 1;
-        }
-        return post;
-      });
-
-      const response = await fetch(`/api/cart/${itemId}/decrease`, {
-        method: "PUT", // Use the PUT method for updates
-      });
-
-      if (response.ok) {
-        setPosts(updatedPosts);
-        // You can show a success message or update the UI accordingly
-        console.log("Cart item quantity decreased in the database");
-      } else {
-        // Handle error response from the server
-        console.error("Failed to decrease cart item quantity in the database");
-      }
-    } catch (error) {
-      console.error(
-        "An error occurred while decreasing cart item quantity:",
-        error
-      );
-    }
-  };
-
-  useEffect(() => {
-    const setUpProviders = async () => {
-      const response = await getProviders();
-
-      setProviders(response);
-    };
-    setUpProviders();
   }, []);
+
+  const removeFromCart = (itemId) => {
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartArray = [];
+
+      for (const key in cart) {
+        if (key !== "num" && cart.hasOwnProperty(key)) {
+          cartArray.push(cart[key]);
+        }
+      }
+      const updatedCart = cartArray.filter((item) => item.productid !== itemId);
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setPosts(updatedCart);
+    }
+  };
+
+  const refresh = ()=>{
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartArray = [];
+
+      for (const key in cart) {
+        if (key !== "num" && cart.hasOwnProperty(key)) {
+          cartArray.push(cart[key]);
+        }
+      }
+
+      setPosts(cartArray);
+  }
+
+  const increaseQuantity = (itemId) => {
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartArray = [];
+
+      for (const key in cart) {
+        if (key !== "num" && cart.hasOwnProperty(key)) {
+          cartArray.push(cart[key]);
+        }
+      }
+      const updatedCart = cartArray.map((item) => {
+        if (item.productid === itemId) {
+          item.quantity += 1;
+        }
+        return item;
+      });
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setPosts(updatedCart);
+    }
+  };
+
+  const decreaseQuantity = (itemId) => {
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cartArray = [];
+
+      for (const key in cart) {
+        if (key !== "num" && cart.hasOwnProperty(key)) {
+          cartArray.push(cart[key]);
+        }
+      }
+      const updatedCart = cartArray.map((item) => {
+        if (item.productid === itemId && item.quantity > 1) {
+          item.quantity -= 1;
+        }
+        return item;
+      });
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      setPosts(updatedCart);
+    }
+  };
   return (
     <nav className="w-full pt-4 mb-6 pl-4 pr-4">
       {/* Desktop Nevigation  */}
@@ -225,60 +193,6 @@ function Nav() {
           />
         </form>
         <div className="flex gap-3">
-          {session?.user ? (
-            <div className="flex justify-end">
-              <Dropdown>
-                <DropdownTrigger>
-                  <button>
-                  <Image
-                    src={session?.user.image}
-                    alt="logo"
-                    width={40}
-                    height={40}
-                    className=" object-contain rounded-full"
-                  />
-                  </button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Static Actions">
-                  <DropdownItem>
-                    <Link
-                      href="/profile"
-                    >
-                      My Profile
-                    </Link>
-                  </DropdownItem>
-                  <DropdownItem
-                    className="text-danger"
-                    color="danger"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    Sign Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-          ) : (
-            <>
-              {providers &&
-                Object.values(providers).map((provider) => {
-                  if (provider.id === "google") {
-                    return (
-                      <Image
-                        src="assets/images/User.svg"
-                        alt="user"
-                        width={20}
-                        height={20}
-                        type="button"
-                        key={provider.name}
-                        onClick={() => router.push("/Signin")}
-                      />
-                    );
-                  }
-                })}
-            </>
-          )}
           <Image
             src="assets/images/Bag.svg"
             alt="cart"
@@ -399,7 +313,7 @@ function Nav() {
               >
                 Hoddies
               </Link>
-              
+
               <Divider />
               <Link
                 href="/search?category=Mugs"
@@ -432,60 +346,6 @@ function Nav() {
           </p>
         </Link>
         <div className="flex gap-3">
-          {session?.user ? (
-            <div className="flex justify-end">
-              <Dropdown>
-                <DropdownTrigger>
-                  <button>
-                  <Image
-                    src={session?.user.image}
-                    alt="logo"
-                    width={40}
-                    height={40}
-                    className=" object-contain rounded-full"
-                  />
-                  </button>
-                </DropdownTrigger>
-                <DropdownMenu aria-label="Static Actions">
-                  <DropdownItem>
-                    <Link
-                      href="/profile"
-                    >
-                      My Profile
-                    </Link>
-                  </DropdownItem>
-                  <DropdownItem
-                    className="text-danger"
-                    color="danger"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    Sign Out
-                  </DropdownItem>
-                </DropdownMenu>
-              </Dropdown>
-            </div>
-          ) : (
-            <>
-              {providers &&
-                Object.values(providers).map((provider) => {
-                  if (provider.id === "google") {
-                    return (
-                      <Image
-                        src="assets/images/User.svg"
-                        alt="user"
-                        width={20}
-                        height={20}
-                        type="button"
-                        key={provider.name}
-                        onClick={() => router.push("/Signin")}
-                      />
-                    );
-                  }
-                })}
-            </>
-          )}
           <Image
             src="assets/images/Bag.svg"
             alt="cart"
@@ -531,21 +391,27 @@ function Nav() {
         <div className="h-cart2 overflow-y-scroll overflow-x-hidden">
           <CartCardList
             data={posts}
+            refresh={refresh}
             removeFromCart={removeFromCart}
             increaseQuantity={increaseQuantity}
             decreaseQuantity={decreaseQuantity}
           />
         </div>
         <Divider />
-        <div className="flex h-cart1 gap-3 justify-center items-center">
-          <div className=" w-1/3 h-full flex flex-col justify-center">
-            <p className="font-semibold">₹{posts.reduce((sum,item)=>sum+item.Productid.price,0)}</p>
-            <p className="text-zinc-500">Total Payable</p>
+        {posts.length === 0 ? (
+          <></>
+        ) : (
+          <div className="flex h-cart1 gap-3 justify-center items-center">
+            
+            <div className=" w-1/3 h-full flex flex-col justify-center">
+              {/* <p className="font-semibold">₹{posts.reduce((sum,item)=>sum+item.Productid.price,0)}</p> */}
+              <p className="text-zinc-500">Total Payable</p>
+            </div>
+            <button className="w-2/3 h-5/6 rounded-full bg-blue-600 text-white">
+              Proceed to Buy
+            </button>
           </div>
-          <button className="w-2/3 h-5/6 rounded-full bg-blue-600 text-white">
-            Proceed to Buy
-          </button>
-        </div>
+        )}
       </Drawer>
     </nav>
   );
