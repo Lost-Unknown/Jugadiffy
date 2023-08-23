@@ -11,6 +11,7 @@ const CartCard = ({
   increaseQuantity,
   decreaseQuantity,
 }) => {
+  
   const [post,setPost] = useState({pname:"",price:"",price2:"",image:""})
   useEffect(() => {
     const getProductDetails = async () => {
@@ -26,6 +27,22 @@ const CartCard = ({
 
     getProductDetails();
   }, [_id]);
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// Find the index of the product you want to update (replace 'productIdToUpdate' with the actual product ID)
+const productIndexToUpdate = cart.findIndex(
+  (item) => item.productid === _id
+);
+
+if (productIndexToUpdate !== -1) {
+  // Update the price of the product (replace 'newPrice' with the actual new price)
+  cart[productIndexToUpdate].price = post.price;
+  cart[productIndexToUpdate].productname = post.pname;
+
+
+  // Update the cart in localStorage
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
   const handleIncrease = () => {
     increaseQuantity(_id);
   };

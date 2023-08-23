@@ -5,7 +5,7 @@ import { Carousel ,IconButton } from "@material-tailwind/react";
 const ProductImage = ({data}) => {
   return (
     <Carousel 
-    className="rounded-xl"
+    className="rounded-xl z-10"
       prevArrow={({ handlePrev }) => (
         <IconButton
           variant="text"

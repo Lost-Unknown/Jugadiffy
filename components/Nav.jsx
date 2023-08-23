@@ -8,6 +8,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Input } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
 import CartCardList from "./CartCardList";
+import DataForm from "./DataForm";
 function Nav() {
   const router = useRouter();
   const [searchtext, setSearchtext] = useState({ text: "" });
@@ -18,7 +19,6 @@ function Nav() {
   const openDrawerLeft = () => setOpenLeft(true);
   const closeDrawerLeft = () => setOpenLeft(false);
   const [posts, setPosts] = useState([]);
-
   useEffect(() => {
     const fetchItems = () => {
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -29,8 +29,8 @@ function Nav() {
           cartArray.push(cart[key]);
         }
       }
-
       setPosts(cartArray);
+
     };
 
     if (typeof window !== "undefined") {
@@ -55,18 +55,18 @@ function Nav() {
     }
   };
 
-  const refresh = ()=>{
+  const refresh = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const cartArray = [];
+    const cartArray = [];
 
-      for (const key in cart) {
-        if (key !== "num" && cart.hasOwnProperty(key)) {
-          cartArray.push(cart[key]);
-        }
+    for (const key in cart) {
+      if (key !== "num" && cart.hasOwnProperty(key)) {
+        cartArray.push(cart[key]);
       }
+    }
 
-      setPosts(cartArray);
-  }
+    setPosts(cartArray);
+  };
 
   const increaseQuantity = (itemId) => {
     if (typeof window !== "undefined") {
@@ -336,7 +336,7 @@ function Nav() {
         <Link href="/" className="flex gap-2 flex-center">
           <Image
             src="/assets/images/LogoJug.png"
-            alt="promptopialogo"
+            alt="Logo"
             width={40}
             height={40}
             className=" object-contain"
@@ -362,36 +362,58 @@ function Nav() {
         onClose={closeDrawerRight}
         className="p-4 z-50 right-0 h-screen"
       >
-        <div className="mb-6 h-cart1  flex items-center justify-between">
+        <div className=" h-cart1  flex items-center justify-between">
           <Typography variant="h4" color="blue-gray">
             Shopping Cart
           </Typography>
-          <IconButton
-            variant="text"
-            color="blue-gray"
-            onClick={closeDrawerRight}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5"
+          <div>
+            
+            <IconButton
+              variant="text"
+              color="blue-gray"
+              onClick={() => refresh()}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </IconButton>
+              <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2}
+          stroke="currentColor"
+          className="h-5 w-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+          />
+        </svg>
+            </IconButton>
+            <IconButton
+              variant="text"
+              color="blue-gray"
+              onClick={closeDrawerRight}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="h-5 w-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </IconButton>
+          </div>
         </div>
         <Divider />
         <div className="h-cart2 overflow-y-scroll overflow-x-hidden">
           <CartCardList
             data={posts}
-            refresh={refresh}
             removeFromCart={removeFromCart}
             increaseQuantity={increaseQuantity}
             decreaseQuantity={decreaseQuantity}
@@ -402,14 +424,11 @@ function Nav() {
           <></>
         ) : (
           <div className="flex h-cart1 gap-3 justify-center items-center">
-            
             <div className=" w-1/3 h-full flex flex-col justify-center">
-              {/* <p className="font-semibold">₹{posts.reduce((sum,item)=>sum+item.Productid.price,0)}</p> */}
+              <p className="font-semibold">₹{posts.reduce((sum,item)=>sum+(item.price*item.quantity),0)}</p>
               <p className="text-zinc-500">Total Payable</p>
             </div>
-            <button className="w-2/3 h-5/6 rounded-full bg-blue-600 text-white">
-              Proceed to Buy
-            </button>
+            <DataForm />
           </div>
         )}
       </Drawer>

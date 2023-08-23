@@ -11,10 +11,11 @@ const ViewProduct =  () => {
 
   const [submitting, setIsSubmitting] = useState(false);
   const [post, setPost] = useState({id:"",pname: "", price: "",price2:"",desc:"",image:[],colour:[],size:[],category:[]});
-
+  const [loading,setLoading] = useState(null)
 
     useEffect(()=>{
       const getProductDetails  = async() =>{
+        setLoading(true)
         const response  = await fetch(`/api/product/${productId}`)
         const data = await response.json();
 
@@ -29,6 +30,7 @@ const ViewProduct =  () => {
           size:data.size,
           category:data.category
         })
+        setLoading(false)
       }
 
       if(productId) getProductDetails()
@@ -36,6 +38,7 @@ const ViewProduct =  () => {
   return (
     <ProductPage 
         post={post}
+        loading={loading}
         setPost={setPost}
         submitting={submitting}
     />
