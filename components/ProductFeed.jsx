@@ -29,7 +29,7 @@ const ProductCardList = ({data}) => {
   )
 }
 
-const ProductFeed = ({category,product}) => {
+const ProductFeed = ({category,product,priceFilter,colorFilter,sizeFilter}) => {
     const [ posts,setPosts] = useState([]);
     let apiUrl;
     if(category==null){
@@ -43,10 +43,45 @@ const ProductFeed = ({category,product}) => {
 
           const response = await fetch(apiUrl);
           const data = await response.json();
-          setPosts(data);
-      };
+          const colorPattern = new RegExp(colorFilter.map(color => `(${color})`).join("|"), "i");
+          const sizePattern = new RegExp(sizeFilter.map(size => `(${size})`).join("|"), "i");
+    
+          // Apply filtering based on criteria using regex
+          const filteredPosts = data.filter((post) => {
+            const price = Number(post.price);
+            if (priceFilter.includes("0") && price > 500) {
+              return false;
+            }
+            if (priceFilter.includes("1") && (price <= 500 && price >= 1000)) {
+              return false;
+            }
+            if (priceFilter.includes("2") && (price <= 1000 && price >= 1500)) {
+              return false;
+            }
+            if (priceFilter.includes("3") && (price <= 1500 && price >= 2000)) {
+              return false;
+            }
+            if (priceFilter.includes("4") && price <= 2000) {
+              return false;
+            }
+    
+            // Check color filter using regex
+            if (colorFilter.length > 0 && !colorPattern.test(post.colour)) {
+              return false;
+            }
+    
+            // Check size filter using regex
+            if (sizeFilter.length > 0 && !sizePattern.test(post.size)) {
+              return false;
+            }
+    
+            return true;
+          });
+    
+          setPosts(filteredPosts);
+        };
       fetchPosts();  
-    },[apiUrl]);
+    },[apiUrl,priceFilter,colorFilter,sizeFilter]);
     return (
         <section className="w-full">
           <ProductCardList

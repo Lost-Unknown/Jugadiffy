@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 
 const ProductCard = ({ Name, Price, Price2, Url, ImageUrl, Colour, Size }) => {
   const router = useRouter();
+  const truncatedName = Name.length > 22 ? Name.slice(0, 22) + "..." : Name;
   return (
     <div
       onClick={() => router.push(`/product/?id=${Url}`)}
@@ -21,12 +22,12 @@ const ProductCard = ({ Name, Price, Price2, Url, ImageUrl, Colour, Size }) => {
       </div>
       <div className="flex flex-col h-1/6 p-0.5  w-full bg-white">
         <p className="font-semibold text-black md:text-lg text-sm text-left pl-3 py-0.5 ">
-          {Name}
+          {truncatedName}
         </p>
         <div className="flex pl-3 md:py-0.5 py-0  gap-2 items-end">
           <p className="text-black md:text-md font-semibold text-sm">₹{Price}</p>
           <p className="text-zinc-500 md:text-sm line-through">₹{Price2}</p>
-          <p className="text-green-500 md:text-md text-sm font-semibold">{((Price2/Price)*100)-100}% Off</p>
+          <p className="text-green-500 md:text-md text-sm font-semibold">{Math.trunc(((Price2-Price )/ Price2)*100)}% Off</p>
         </div>
       </div>
     </div>

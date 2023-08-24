@@ -140,18 +140,6 @@ const Home = () => {
               </p>
           </Link>
 
-          <Link
-            href=""
-           >
-              <Image
-                width={1080}
-                height={1080}
-                src="http://nobero.com/cdn/shop/collections/9.jpg?v=1679917418 "
-              />
-              <p className=" w-full text-center font-semibold">
-                Co-Ord Sets
-              </p>
-          </Link>
 
           <Link
             href=""
@@ -159,6 +147,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="http://nobero.com/cdn/shop/collections/10.jpg?v=1679917593 "
               />
               <p className=" w-full text-center font-semibold  ">
@@ -172,6 +161,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="http://nobero.com/cdn/shop/collections/8.jpg?v=1679917719 "
               />
               <p className=" w-full text-center font-semibold  ">
@@ -181,48 +171,11 @@ const Home = () => {
 
           <Link
             href=""
-           >
-              <Image
-                width={1080}
-                height={1080}
-                src="http://nobero.com/cdn/shop/files/fashleasure.png?v=1686034040"
-              />
-              <p className=" w-full text-center font-semibold  ">
-                Fashleisure Edit
-              </p>
-          </Link>
-
-          <Link
-            href=""
-           >
-              <Image
-                width={1080}
-                height={1080}
-                src="http://nobero.com/cdn/shop/files/texture_edit_3.png?v=1686034146"
-              />
-              <p className=" w-full text-center font-semibold  ">
-                Textured Co-ords
-              </p>
-          </Link>
-
-          <Link
-            href=""
-           >
-              <Image
-                width={1080}
-                height={1080}
-                src="http://nobero.com/cdn/shop/files/Untitled_design_34c01513-c583-43e5-8e0e-af2a5deb88c3.png?v=1685700930"
-              />
-              <p className=" w-full text-center font-semibold">
-                Oversized Tees
-              </p>
-          </Link>
-
-          <Link
-            href=""
           >
               <Image
                 width={1080}
+                className=" mix-blend-multiply"
+
                 height={1080}
                 src="http://nobero.com/cdn/shop/collections/11_303ebb63-5abc-41db-ba82-468445c8f2d8.jpg?v=1679917779 "
               />
@@ -240,7 +193,7 @@ const Home = () => {
                 src="http://nobero.com/cdn/shop/files/blush_2.png?v=1684928509"
               />
               <p className=" w-full text-center font-semibold">
-                Plus Size Tees
+                Oversized Tees
               </p>
           </Link>
         </div>
@@ -264,23 +217,12 @@ const Home = () => {
           </Link>
 
           <Link
-            href="">
-              <Image
-                width={1080}
-                height={1080}
-                src="https://nobero.com/cdn/shop/collections/Untitled_design_3_3cdc79b2-d950-40e5-9a35-47a983b79c3f.jpg?v=1679997310"
-              />
-              <p className="  w-full text-center font-semibold ">
-                Co-Ord Sets
-              </p>
-          </Link>
-
-          <Link
             href=""
            >
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="https://nobero.com/cdn/shop/collections/3_7.jpg?v=1681740357"
               />
               <p className=" w-full text-center font-semibold">
@@ -294,6 +236,7 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="https://nobero.com/cdn/shop/collections/2-5.jpg?v=1679997455"
               />
               <p className=" w-full text-center font-semibold  ">
@@ -303,23 +246,11 @@ const Home = () => {
 
           <Link
             href=""
-          >
-              <Image
-                width={1080}
-                height={1080}
-                src="https://nobero.com/cdn/shop/collections/elevated_women_copy_1.png?v=1684928059"
-              />
-              <p className=" w-full text-center font-semibold  ">
-                Fashleisure Edit
-              </p>
-          </Link>
-
-          <Link
-            href=""
            >
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="https://nobero.com/cdn/shop/collections/1.jpg?v=1679984145"
               />
               <p className=" w-full text-center font-semibold  ">
@@ -327,18 +258,6 @@ const Home = () => {
               </p>
           </Link>
 
-          <Link
-            href=""
-           >
-              <Image
-                width={1080}
-                height={1080}
-                src="https://nobero.com/cdn/shop/files/women.png?v=1686034454"
-              />
-              <p className=" w-full text-center font-semibold  ">
-                Textured Co-ords
-              </p>
-          </Link>
 
           <Link
             href=""
@@ -346,23 +265,11 @@ const Home = () => {
               <Image
                 width={1080}
                 height={1080}
+                className=" mix-blend-multiply"
                 src="https://nobero.com/cdn/shop/files/5_MConverter.eu.png?v=1684168859"
               />
               <p className=" w-full text-center font-semibold">
                 Luxury Co-Ord
-              </p>
-          </Link>
-
-          <Link
-            href=""
-          >
-              <Image
-                width={1080}
-                height={1080}
-                src="https://nobero.com/cdn/shop/collections/6.jpg?v=1679984162"
-              />
-              <p className=" w-full text-center font-semibold">
-                Textured Collection
               </p>
           </Link>
 

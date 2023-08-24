@@ -91,7 +91,7 @@ const Footer = () => {
       </div>
       <hr className=" border-zinc-500" />
       <div className="md:flex-row  flex-col flex gap-2 pt-3 pb-3 text-zinc-200 flex-center">
-        <p>© 2023 Jugaadify. All rights reserved.</p>
+        <p>© 2023 JUGAADIFY  All rights reserved.</p>
         <span className="md:block hidden">|</span>
         <p>Loved by India</p>
       </div>

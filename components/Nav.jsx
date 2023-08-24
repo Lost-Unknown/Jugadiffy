@@ -5,10 +5,18 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Drawer, Typography, IconButton } from "@material-tailwind/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Input } from "@nextui-org/react";
 import { Divider } from "@nextui-org/react";
 import CartCardList from "./CartCardList";
-import DataForm from "./DataForm";
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from "@nextui-org/react";
+import { Input, Textarea } from "@nextui-org/react";
 function Nav() {
   const router = useRouter();
   const [searchtext, setSearchtext] = useState({ text: "" });
@@ -18,6 +26,7 @@ function Nav() {
   const closeDrawerRight = () => setOpenRight(false);
   const openDrawerLeft = () => setOpenLeft(true);
   const closeDrawerLeft = () => setOpenLeft(false);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const fetchItems = () => {
@@ -30,9 +39,47 @@ function Nav() {
         }
       }
       setPosts(cartArray);
-
     };
 
+    if (typeof window !== "undefined") {
+      // Ensure localStorage operations are only done on the client side
+      fetchItems();
+    }
+  }, []);
+  const [detail, setDetail] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    str: "",
+    city: "",
+    zip: "",
+  });
+  const setDetails = () => {
+    const data = {
+      name: detail.name,
+      email: detail.email,
+      mobile: detail.mobile,
+      str: detail.str,
+      city: detail.city,
+      zip: detail.zip,
+    };
+
+    localStorage.setItem("userdat", JSON.stringify(data));
+    let innerchat =""
+    for(let i =0;i<posts.length;i++){
+      innerchat+=`Product Name: ${posts[i].productname}\nColour: ${posts[i].color}\nSize: ${posts[i].size}\nQuantity: ${posts[i].quantity}\n\n`
+    }
+    const chat = `Hello Jugaadify, \nI would like to purchase the folowing item \n\n${innerchat}Here are my Details:-\nName: ${detail.name} \nEmail: ${detail.email} \nMobile: ${detail.mobile}\nAddress:-\n${detail.str}\n${detail.city}  ${detail.zip}`;
+    const encodedChat = encodeURIComponent(chat);
+    window.open(`https://wa.me/918860510084?text=${encodedChat}`);
+  };
+  useEffect(() => {
+    const fetchItems = () => {
+      const getdata = localStorage.getItem("userdat");
+      if (getdata) {
+        setDetail(JSON.parse(getdata));
+      }
+    };
     if (typeof window !== "undefined") {
       // Ensure localStorage operations are only done on the client side
       fetchItems();
@@ -140,13 +187,13 @@ function Nav() {
               href="/search/?category=Mugs"
               className="text-xl font-bold bg-none text-zinc-700 hover:underline underline-offset-2"
             >
-              Hoodies
+              Hoodies & Jackets
             </Link>
             <Link
               href="/search/?category=Mugs"
               className="text-xl font-bold bg-none text-zinc-700 hover:underline underline-offset-2"
             >
-              Jackets
+              Mugs
             </Link>
           </div>
         </div>
@@ -311,7 +358,7 @@ function Nav() {
                 className="font-semibold text-lg"
                 onClick={closeDrawerLeft}
               >
-                Hoddies
+                Hoddies & Jackets
               </Link>
 
               <Divider />
@@ -320,7 +367,7 @@ function Nav() {
                 className="font-semibold text-lg"
                 onClick={closeDrawerLeft}
               >
-                Jackets
+                Mugs
               </Link>
               <Divider />
               <Link
@@ -428,7 +475,112 @@ function Nav() {
               <p className="font-semibold">₹{posts.reduce((sum,item)=>sum+(item.price*item.quantity),0)}</p>
               <p className="text-zinc-500">Total Payable</p>
             </div>
-            <DataForm />
+            <>
+                  <button
+                    onClick={onOpen}
+                    className={`w-full rounded-full pt-4 pb-4 bg-blue-600 text-white`}
+                    color="primary"
+                  >
+                    Buy Now
+                  </button>
+                  <Modal
+                    isOpen={isOpen}
+                    onOpenChange={onOpenChange}
+                    placement="auto"
+                  >
+                    <ModalContent>
+                      {(onClose) => (
+                        <>
+                          <ModalHeader className="flex flex-col gap-1">
+                            Order Details
+                          </ModalHeader>
+                          <ModalBody>
+                            <Input
+                              autoFocus
+                              value={detail.name}
+                              label="Name"
+                              onChange={(e) =>
+                                setDetail({ ...detail, name: e.target.value })
+                              }
+                              placeholder="Enter your name"
+                              variant="bordered"
+                            />
+                            <Input
+                              autoFocus
+                              label="Email"
+                              value={detail.email}
+                              onChange={(e) =>
+                                setDetail({ ...detail, email: e.target.value })
+                              }
+                              placeholder="Enter your email"
+                              variant="bordered"
+                            />
+                            <Input
+                              autoFocus
+                              value={detail.mobile}
+                              onChange={(e) =>
+                                setDetail({ ...detail, mobile: e.target.value })
+                              }
+                              label="Mobile"
+                              placeholder="Enter your mobile no."
+                              variant="bordered"
+                            />
+                            <Textarea
+                              label="Address"
+                              variant="bordered"
+                              value={detail.str}
+                              onChange={(e) =>
+                                setDetail({ ...detail, str: e.target.value })
+                              }
+                              labelPlacement="outside"
+                              placeholder="Street Address"
+                              className=""
+                            />
+                            <div className="flex gap-2">
+                              <Input
+                                autoFocus
+                                label="City"
+                                value={detail.city}
+                                onChange={(e) =>
+                                  setDetail({ ...detail, city: e.target.value })
+                                }
+                                className="w-1/2"
+                                placeholder="Enter your city"
+                                variant="bordered"
+                              />
+                              <Input
+                                autoFocus
+                                className="w-1/2"
+                                label="Zip code"
+                                value={detail.zip}
+                                onChange={(e) =>
+                                  setDetail({ ...detail, zip: e.target.value })
+                                }
+                                placeholder="ZIP"
+                                variant="bordered"
+                              />
+                            </div>
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button
+                              color="danger"
+                              variant="flat"
+                              onPress={onClose}
+                            >
+                              Close
+                            </Button>
+                            <Button
+                              className=" px-3 rounded-xl text-white bg-blue-600"
+                              onPress={setDetails}
+                            >
+                              Continue
+                            </Button>
+                          </ModalFooter>
+                        </>
+                      )}
+                    </ModalContent>
+                  </Modal>
+                </>
           </div>
         )}
       </Drawer>

@@ -56,7 +56,7 @@ const ProductImage = ({data}) => {
       )}
     >
     {data.map((post) =>(
-      <Image
+      <Image className='mx-auto'
       src={post}
       width={800}
       height={800} />
